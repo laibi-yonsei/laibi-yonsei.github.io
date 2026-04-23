@@ -6,14 +6,44 @@
 <title>Gallery – LAIBI</title>
 <link rel="stylesheet" href="styles.css" />
 <style>
-  .gallery-item { position: relative; overflow: hidden; border-radius: 6px; }
-  .gallery-item .caption {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.7));
-    color: #fff; padding: 24px 12px 10px; font-size: 13px; font-weight: 500;
-    opacity: 0; transition: opacity 0.3s;
+  /* 실제 사진을 위한 세련된 갤러리 디자인 업그레이드 */
+  .gallery-item { 
+    position: relative; 
+    overflow: hidden; 
+    border-radius: 8px; 
+    background-color: #f8f9fa; /* 사진 로딩 전 배경색 */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   }
-  .gallery-item:hover .caption { opacity: 1; }
+  
+  .gallery-item img {
+    width: 100%;
+    height: 240px; /* 사진 높이 고정 (원하시는 대로 조절 가능) */
+    object-fit: cover; /* 세로나 가로로 긴 사진도 찌그러지지 않고 꽉 차게 잘라줌 */
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  
+  .gallery-item:hover img {
+    transform: scale(1.05); /* 마우스 올렸을 때 사진이 살짝 커지는 효과 */
+  }
+
+  .gallery-item .caption {
+    position: absolute; 
+    bottom: 0; left: 0; right: 0;
+    /* 글씨가 잘 보이도록 아래쪽에서 위로 자연스럽게 어두워지는 그라데이션 */
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+    color: #fff; 
+    padding: 40px 16px 16px; 
+    font-size: 15px; 
+    font-weight: 500;
+    opacity: 0; 
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* 텍스트 위에서도 마우스 효과가 유지되도록 함 */
+  }
+  
+  .gallery-item:hover .caption { 
+    opacity: 1; 
+  }
 </style>
 </head>
 <body>
@@ -33,24 +63,15 @@
 <div id="site-footer"></div>
 
 <script src="components.js"></script>
+<script src="gallery_data.js"></script>
 <script>
 initPage('Gallery');
 
-const photos = [
-  'Lab Retreat 2025', 'MICCAI Presentation', 'Group Photo',
-  'Workshop', 'Lab Seminar', 'Graduation Ceremony',
-  'Conference Trip', 'Team Dinner', 'Poster Session',
-];
-
-// Generate placeholder colors for visual variety
-const colors = ['#e8ddd3','#d3dde8','#d8e8d3','#e8d3d8','#ddd3e8','#e8e4d3','#d3e8e4','#e0d3e8','#e8d8d3'];
-
-document.getElementById('gallery-grid').innerHTML = photos.map((p, i) => `
+// HTML 화면에 사진들을 그려주는 함수
+document.getElementById('gallery-grid').innerHTML = photos.map((p) => `
   <div class="gallery-item">
-    <div style="width:100%;height:200px;background:${colors[i]};display:flex;align-items:center;justify-content:center;color:var(--gray-light);font-size:13px;">
-      📷 ${p}
-    </div>
-    <div class="caption">${p}</div>
+    <img src="${p.image}" alt="${p.title}" onerror="this.src='assets/placeholder.jpg'">
+    <div class="caption">${p.title}</div>
   </div>
 `).join('');
 </script>
