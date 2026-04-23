@@ -35,7 +35,7 @@ function renderFooter() {
       <div class="footer-links">
         <a href="mailto:syang@yonsei.ac.kr">Contact</a>
         <a href="apply.html">Join Us</a>
-        <a href="https://github.com/" target="_blank">GitHub</a>
+        <a href="https://github.com/laibi-yonsei" target="_blank">GitHub</a>
       </div>
     </div>
   </footer>

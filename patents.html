@@ -15,10 +15,21 @@
 </div>
 
 <div class="container">
+  <!-- International Patents -->
   <section class="section">
+    <h2 class="section-title">International Patents</h2>
     <table class="data-table">
-      <thead><tr><th>#</th><th>Title</th><th>Inventors</th><th>Status</th><th>Year</th></tr></thead>
-      <tbody id="patent-body"></tbody>
+      <thead><tr><th>#</th><th>Title</th><th>Inventors</th><th>Registration No.</th><th>Status</th><th>Year</th></tr></thead>
+      <tbody id="intl-body"></tbody>
+    </table>
+  </section>
+
+  <!-- Domestic Patents -->
+  <section class="section">
+    <h2 class="section-title">Domestic Patents</h2>
+    <table class="data-table">
+      <thead><tr><th>#</th><th>Title</th><th>Inventors</th><th>Registration No.</th><th>Status</th><th>Year</th></tr></thead>
+      <tbody id="domestic-body"></tbody>
     </table>
   </section>
 </div>
@@ -29,22 +40,32 @@
 <script>
 initPage('Patents');
 
-const patents = [
-  { title: 'AI-based Medical Image Diagnostic System', inventors: 'S. Yang, A. Kim', status: 'Registered', year: '2025' },
-  { title: 'Clinical NLP Pipeline for EHR Data Extraction', inventors: 'S. Yang, B. Lee', status: 'Pending', year: '2025' },
-  { title: 'Multi-modal Health Data Fusion Method', inventors: 'S. Yang, C. Park', status: 'Registered', year: '2024' },
-  { title: 'Automated Pathology Report Generation System', inventors: 'S. Yang, D. Choi', status: 'Pending', year: '2024' },
+const intlPatents = [
+  { title: 'AI-based Medical Image Diagnostic System', inventors: 'S. Yang, A. Kim', regNo: 'US-XXXX-XXXX', status: 'Registered', year: '2025' },
+  { title: 'Clinical NLP Pipeline for EHR Data Extraction', inventors: 'S. Yang, B. Lee', regNo: '—', status: 'Pending', year: '2025' },
 ];
 
-document.getElementById('patent-body').innerHTML = patents.map((p, i) => `
-  <tr>
-    <td style="color:var(--gray-light);">${i + 1}</td>
-    <td><strong>${p.title}</strong></td>
-    <td>${p.inventors}</td>
-    <td><span class="badge ${p.status === 'Registered' ? 'badge--green' : 'badge--orange'}">${p.status}</span></td>
-    <td>${p.year}</td>
-  </tr>
-`).join('');
+const domesticPatents = [
+  { title: '다중 모달 건강 데이터 융합 방법', inventors: '양세정, 박OO', regNo: '10-XXXX-XXXXXXX', status: 'Registered', year: '2024' },
+  { title: '자동 병리 보고서 생성 시스템', inventors: '양세정, 최OO', regNo: '—', status: 'Pending', year: '2024' },
+  { title: 'AI 기반 의료 영상 진단 보조 시스템', inventors: '양세정, 김OO', regNo: '10-XXXX-XXXXXXX', status: 'Registered', year: '2023' },
+];
+
+function renderTable(id, patents) {
+  document.getElementById(id).innerHTML = patents.map((p, i) => `
+    <tr>
+      <td style="color:var(--gray-light);">${i + 1}</td>
+      <td><strong>${p.title}</strong></td>
+      <td>${p.inventors}</td>
+      <td style="font-size:13px;color:var(--gray-light);">${p.regNo}</td>
+      <td><span class="badge ${p.status === 'Registered' ? 'badge--green' : 'badge--orange'}">${p.status}</span></td>
+      <td>${p.year}</td>
+    </tr>
+  `).join('');
+}
+
+renderTable('intl-body', intlPatents);
+renderTable('domestic-body', domesticPatents);
 </script>
 </body>
 </html>
