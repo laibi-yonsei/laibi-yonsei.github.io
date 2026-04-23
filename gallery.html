@@ -40,24 +40,33 @@
   
   .gallery-item:hover .caption { opacity: 1; }
 
-  /* 💡 참고 이미지 스타일이 적용된 팝업(모달) 창 */
+  /* 💡 정중앙 고정을 위해 수정된 팝업 창 배경 */
   .modal-overlay {
-    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    display: none; /* 평소엔 숨김, 열릴 때 JS에서 flex로 변경됨 */
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
     background-color: rgba(0, 0, 0, 0.95); z-index: 9999; 
-    overflow: auto; padding: 60px 20px; box-sizing: border-box;
+    
+    /* 완벽한 정중앙 정렬을 위한 Flex 설정 */
+    justify-content: center;
+    align-items: center;
+    padding: 20px; box-sizing: border-box;
   }
 
   .modal-container {
     display: flex; flex-direction: column; align-items: center;
-    max-width: fit-content; margin: 0 auto; position: relative;
+    position: relative;
   }
 
+  /* 💡 화면의 70% 크기로 맞추기 위한 이미지 영역 */
   .modal-content {
     display: block; border-radius: 4px;
     box-shadow: 0 0 30px rgba(0,0,0,0.5);
     animation: zoomIn 0.3s ease;
-    /* 원본 크기 유지를 위해 제한 해제 */
-    max-width: none; max-height: none;
+    
+    /* 가로/세로 모두 화면(Viewport)의 70%를 넘지 않도록 제한 */
+    max-width: 70vw; 
+    max-height: 70vh;
+    object-fit: contain; /* 비율 찌그러짐 방지 */
   }
 
   /* 하단 제목 스타일 */
@@ -72,7 +81,7 @@
     color: #fff; font-size: 40px; cursor: pointer; z-index: 10001;
   }
 
-  /* 💡 좌우 내비게이션 버튼 */
+  /* 좌우 내비게이션 버튼 */
   .nav-btn {
     position: fixed; top: 50%; transform: translateY(-50%);
     background: rgba(255,255,255,0.1); color: white;
@@ -95,7 +104,12 @@
     .nav-btn { width: 40px; height: 40px; font-size: 20px; }
     .prev-btn { left: 10px; }
     .next-btn { right: 10px; }
-    .modal-content { width: 100%; }
+    
+    /* 폰에서는 화면이 작으므로 70%가 아닌 95% 꽉 차게 띄워주는 것이 좋습니다 */
+    .modal-content { 
+      max-width: 95vw; 
+      max-height: 80vh; 
+    }
   }
 </style>
 </head>
@@ -132,9 +146,8 @@
 <script>
 initPage('Gallery');
 
-let currentIndex = 0; // 현재 보고 있는 사진의 번호 저장
+let currentIndex = 0; 
 
-// 갤러리 생성
 document.getElementById('gallery-grid').innerHTML = photos.map((p, index) => `
   <div class="gallery-item" onclick="openModal(${index})">
     <img src="${p.image}" alt="${p.title}" onerror="this.src='assets/placeholder.jpg'">
@@ -142,15 +155,14 @@ document.getElementById('gallery-grid').innerHTML = photos.map((p, index) => `
   </div>
 `).join('');
 
-// 팝업 열기
+// 💡 팝업 열기 (정중앙 정렬을 위해 block이 아닌 flex로 엽니다)
 function openModal(index) {
   currentIndex = index;
   updateModal();
-  document.getElementById('image-modal').style.display = 'block';
-  document.body.style.overflow = 'hidden'; // 팝업 시 본문 스크롤 방지
+  document.getElementById('image-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden'; 
 }
 
-// 이미지 및 텍스트 업데이트
 function updateModal() {
   const modalImg = document.getElementById('modal-img');
   const modalText = document.getElementById('modal-text');
@@ -159,28 +171,24 @@ function updateModal() {
   modalText.innerText = photos[currentIndex].title;
 }
 
-// 이미지 변경 (이전/다음)
 function changeImage(step, event) {
-  if (event) event.stopPropagation(); // 배경 클릭 이벤트 방지
+  if (event) event.stopPropagation(); 
   
   currentIndex += step;
   
-  // 마지막 사진에서 다음을 누르면 첫 번째로, 반대의 경우 마지막으로 루프
   if (currentIndex >= photos.length) currentIndex = 0;
   if (currentIndex < 0) currentIndex = photos.length - 1;
   
   updateModal();
 }
 
-// 팝업 닫기
 function closeModal() {
   document.getElementById('image-modal').style.display = 'none';
-  document.body.style.overflow = 'auto'; // 스크롤 복구
+  document.body.style.overflow = 'auto'; 
 }
 
-// 키보드 좌우 화살표 및 ESC 키 지원
 document.addEventListener('keydown', (e) => {
-  if (document.getElementById('image-modal').style.display === 'block') {
+  if (document.getElementById('image-modal').style.display === 'flex') {
     if (e.key === 'ArrowLeft') changeImage(-1);
     if (e.key === 'ArrowRight') changeImage(1);
     if (e.key === 'Escape') closeModal();
