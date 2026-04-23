@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LAIBI – Lab of AI in Biomedical Informatics</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div id="site-nav"></div>
+
+<!-- Hero -->
+<section style="text-align: center; padding: 56px 24px 48px;">
+  <div style="font-size: 14px; letter-spacing: 3px; color: var(--gray-light); text-transform: uppercase; margin-bottom: 8px;">
+    Yonsei University · Wonju College of Medicine
+  </div>
+  <h1 style="font-family: var(--font-serif); font-size: 42px; color: var(--blue); line-height: 1.2; margin-bottom: 32px;">
+    Lab of AI in Biomedical Informatics
+  </h1>
+
+  <div class="container" style="display: flex; gap: 40px; align-items: flex-start; text-align: left; max-width: 960px;">
+    <!-- Logo -->
+    <div style="flex-shrink: 0; text-align: center; width: 200px;">
+      <img src="assets/laibi-logo.png" alt="LAIBI Logo" style="width: 180px; margin-bottom: 8px;" />
+    </div>
+
+    <!-- Intro text -->
+    <div style="flex: 1;">
+      <p style="font-size: 15px; color: var(--gray); line-height: 1.8; margin-bottom: 20px;">
+        Welcome to the <strong>Lab of AI in Biomedical Informatics</strong> (<strong>LAIBI</strong>) at <strong>Yonsei University</strong>.
+        We develop AI-driven solutions for biomedical informatics, bridging precision medicine and intelligent data analysis.
+      </p>
+
+      <h3 style="font-size: 16px; color: #333; margin-bottom: 12px;">Our core research areas include:</h3>
+      <ul style="font-size: 14px; color: var(--gray); line-height: 2; padding-left: 20px;">
+        <li><strong>Medical AI &amp; Imaging:</strong> AI-powered diagnostics and medical image analysis for clinical applications.</li>
+        <li><strong>Clinical NLP:</strong> Natural language processing applied to electronic health records and biomedical literature.</li>
+        <li><strong>Precision Medicine:</strong> Data-driven approaches for personalized treatment and patient stratification.</li>
+        <li><strong>Healthcare Data Science:</strong> Large-scale healthcare data analysis, predictive modeling, and federated learning.</li>
+      </ul>
+
+      <div style="margin-top: 20px; padding: 14px 18px; border-left: 4px solid var(--red); background: #fdf6f0; font-size: 14px; font-style: italic; color: var(--gray); line-height: 1.7;">
+        Our work is recognized at premier conferences. We are committed to advancing biomedical AI in a collaborative and supportive environment.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- News -->
+<section class="section" style="background: var(--bg-alt);">
+  <div class="container">
+    <h2 class="section-title">Latest News</h2>
+    <div id="news-list"></div>
+    <button onclick="loadMoreNews()" id="load-more-btn" style="
+      margin-top: 20px; padding: 8px 24px; border: 1px solid var(--gray-border);
+      border-radius: 20px; background: transparent; color: var(--blue); font-size: 14px;
+      cursor: pointer; font-family: var(--font); transition: all 0.2s;
+    ">Load More News</button>
+  </div>
+</section>
+
+<!-- Location -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Location</h2>
+    <div style="display: flex; gap: 32px; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 280px;">
+        <h3 style="font-size: 18px; color: var(--blue); margin-bottom: 12px;">LAIBI – Lab of AI in Biomedical Informatics</h3>
+        <p style="font-size: 14px; color: var(--gray); line-height: 2;">
+          Dept. of Precision Medicine<br/>
+          Yonsei University Wonju College of Medicine<br/><br/>
+          <strong>Address:</strong> 3F Joint Research Lab A,<br/>
+          16, Wonil-ro 115beon-gil, Wonju-si,<br/>
+          Gangwon-do, 26427, Republic of Korea<br/><br/>
+          <strong>Email:</strong> <a href="mailto:syang@yonsei.ac.kr">syang@yonsei.ac.kr</a>
+        </p>
+      </div>
+      <div style="flex: 1; min-width: 300px; min-height: 280px; background: var(--bg-alt); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--gray-light); font-size: 14px; border: 1px solid var(--gray-border);">
+        📍 Google Map embed placeholder
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="components.js"></script>
+<script>
+initPage('Home');
+
+// News data
+const newsData = [
+  { date: '2026.03', text: 'Paper accepted at MICCAI 2026 — congratulations to the team!' },
+  { date: '2026.01', text: 'New PhD student joins LAIBI lab.' },
+  { date: '2025.12', text: 'Prof. Yang gives invited talk at KSC 2025.' },
+  { date: '2025.10', text: 'LAIBI receives NRF research grant for Medical AI project.' },
+  { date: '2025.08', text: 'Two papers accepted at NeurIPS 2025.' },
+  { date: '2025.06', text: 'Lab retreat to Gangneung — great team bonding!' },
+  { date: '2025.04', text: 'Best Paper Award at KCC 2025.' },
+  { date: '2025.02', text: 'New M.S. students join the lab.' },
+];
+let newsShown = 4;
+function renderNews() {
+  const list = document.getElementById('news-list');
+  list.innerHTML = newsData.slice(0, newsShown).map(n =>
+    `<div style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid #f0f0f0;font-size:14px;">
+      <span style="color:var(--gray-light);min-width:80px;font-weight:500;">${n.date}</span>
+      <span style="color:#333;">${n.text}</span>
+    </div>`
+  ).join('');
+  document.getElementById('load-more-btn').style.display = newsShown >= newsData.length ? 'none' : '';
+}
+function loadMoreNews() { newsShown += 4; renderNews(); }
+renderNews();
+</script>
+</body>
+</html>

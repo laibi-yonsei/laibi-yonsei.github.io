@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Patents – LAIBI</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="site-nav"></div>
+
+<div class="page-header">
+  <h1>Patents</h1>
+  <p>Registered and pending patents</p>
+</div>
+
+<div class="container">
+  <section class="section">
+    <table class="data-table">
+      <thead><tr><th>#</th><th>Title</th><th>Inventors</th><th>Status</th><th>Year</th></tr></thead>
+      <tbody id="patent-body"></tbody>
+    </table>
+  </section>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="components.js"></script>
+<script>
+initPage('Patents');
+
+const patents = [
+  { title: 'AI-based Medical Image Diagnostic System', inventors: 'S. Yang, A. Kim', status: 'Registered', year: '2025' },
+  { title: 'Clinical NLP Pipeline for EHR Data Extraction', inventors: 'S. Yang, B. Lee', status: 'Pending', year: '2025' },
+  { title: 'Multi-modal Health Data Fusion Method', inventors: 'S. Yang, C. Park', status: 'Registered', year: '2024' },
+  { title: 'Automated Pathology Report Generation System', inventors: 'S. Yang, D. Choi', status: 'Pending', year: '2024' },
+];
+
+document.getElementById('patent-body').innerHTML = patents.map((p, i) => `
+  <tr>
+    <td style="color:var(--gray-light);">${i + 1}</td>
+    <td><strong>${p.title}</strong></td>
+    <td>${p.inventors}</td>
+    <td><span class="badge ${p.status === 'Registered' ? 'badge--green' : 'badge--orange'}">${p.status}</span></td>
+    <td>${p.year}</td>
+  </tr>
+`).join('');
+</script>
+</body>
+</html>

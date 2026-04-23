@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Publications – LAIBI</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="site-nav"></div>
+
+<div class="page-header">
+  <h1>Publications</h1>
+  <p>Our research contributions to the field</p>
+</div>
+
+<div class="container">
+  <section class="section">
+    <div class="filter-pills" id="year-filter"></div>
+    <div id="pub-list"></div>
+  </section>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="components.js"></script>
+<script>
+initPage('Publications');
+
+const publications = [
+  { title: 'Paper Title: A Novel Approach to Medical Image Analysis Using Vision Transformers', authors: 'A. Author, B. Author, S. Yang', venue: 'MICCAI 2026', year: 2026, links: ['Paper', 'Code'] },
+  { title: 'Deep Learning for Clinical Text Mining in Electronic Health Records', authors: 'C. Author, D. Author, S. Yang', venue: 'ACL 2026', year: 2026, links: ['Paper', 'Code', 'Project'] },
+  { title: 'Precision Medicine Through Multi-Modal Data Fusion', authors: 'E. Author, S. Yang', venue: 'NeurIPS 2025', year: 2025, links: ['Paper'] },
+  { title: 'Efficient Transformer Architecture for Biomedical Sequence Analysis', authors: 'F. Author, G. Author, S. Yang', venue: 'AAAI 2025', year: 2025, links: ['Paper', 'Code'] },
+  { title: 'Federated Learning for Privacy-Preserving Clinical Data Analysis', authors: 'H. Author, S. Yang', venue: 'ICML 2024', year: 2024, links: ['Paper', 'Code'] },
+  { title: 'Graph Neural Networks for Drug-Drug Interaction Prediction', authors: 'I. Author, J. Author, S. Yang', venue: 'MICCAI 2024', year: 2024, links: ['Paper'] },
+  { title: 'Self-Supervised Pretraining for Medical Image Segmentation', authors: 'K. Author, S. Yang', venue: 'CVPR 2023', year: 2023, links: ['Paper', 'Code', 'Project'] },
+];
+
+const years = ['All', ...new Set(publications.map(p => p.year))].map(String);
+let activeYear = 'All';
+
+function render() {
+  document.getElementById('year-filter').innerHTML = years.map(y =>
+    `<button class="filter-pill ${y === activeYear ? 'active' : ''}" onclick="filterYear('${y}')">${y}</button>`
+  ).join('');
+
+  const filtered = activeYear === 'All' ? publications : publications.filter(p => String(p.year) === activeYear);
+  document.getElementById('pub-list').innerHTML = filtered.map(p => `
+    <div class="pub-entry">
+      <div class="pub-thumb" style="display:flex;align-items:center;justify-content:center;color:var(--gray-light);font-size:12px;">fig</div>
+      <div>
+        <div class="pub-title">${p.title}</div>
+        <div class="pub-authors">${p.authors}</div>
+        <div class="pub-links">
+          <span class="badge">${p.venue}</span>
+          ${p.links.map(l => `<a href="#">${l}</a>`).join('')}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterYear(y) { activeYear = y; render(); }
+render();
+</script>
+</body>
+</html>

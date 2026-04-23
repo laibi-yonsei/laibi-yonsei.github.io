@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Projects – LAIBI</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="site-nav"></div>
+
+<div class="page-header">
+  <h1>Projects</h1>
+  <p>Ongoing and completed research projects</p>
+</div>
+
+<div class="container">
+  <section class="section">
+    <div class="project-grid" id="project-grid"></div>
+  </section>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="components.js"></script>
+<script>
+initPage('Projects');
+
+const projects = [
+  { title: 'AI-Assisted Medical Diagnosis Platform', period: '2024–2026', funder: 'NRF', desc: 'Developing an AI system for automated medical image diagnosis in clinical settings.' },
+  { title: 'Clinical NLP for Korean EHR Systems', period: '2025–2027', funder: 'IITP', desc: 'Building NLP pipelines tailored for Korean electronic health records.' },
+  { title: 'Multi-modal Biomarker Discovery', period: '2023–2025', funder: 'NRF', desc: 'Integrating multi-modal patient data for novel biomarker identification.' },
+  { title: 'Federated Learning for Hospital Networks', period: '2024–2026', funder: 'MSIT', desc: 'Privacy-preserving collaborative learning across multiple hospital systems.' },
+];
+
+document.getElementById('project-grid').innerHTML = projects.map(p => `
+  <div class="card">
+    <div class="card-img" style="display:flex;align-items:center;justify-content:center;color:var(--gray-light);font-size:14px;">Project Image</div>
+    <div class="card-body">
+      <h3 style="font-size:17px;color:#333;margin-bottom:6px;">${p.title}</h3>
+      <p style="font-size:13px;color:var(--gray-light);margin-bottom:8px;">${p.period} · ${p.funder}</p>
+      <p style="font-size:14px;color:var(--gray);margin-bottom:10px;">${p.desc}</p>
+      <a href="#" style="font-size:13px;font-weight:500;">View Details →</a>
+    </div>
+  </div>
+`).join('');
+</script>
+</body>
+</html>
