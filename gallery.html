@@ -1,158 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Gallery – LAIBI</title>
-<link rel="stylesheet" href="styles.css" />
-<style>
-  /* 갤러리 기본 디자인 */
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px;
-    margin-top: 24px;
-  }
+import os
+import requests
+from bs4 import BeautifulSoup
+import time
+import re
+import urllib.parse
 
-  .gallery-item { 
-    position: relative; 
-    overflow: hidden; 
-    border-radius: 10px; 
-    background-color: #f8f9fa; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    cursor: pointer; 
-    aspect-ratio: 4 / 3;
-  }
-  
-  .gallery-item img {
-    width: 100%;
-    height: 100%; 
-    object-fit: cover; 
-    display: block;
-    transition: transform 0.4s ease;
-  }
-  
-  .gallery-item:hover img {
-    transform: scale(1.08); 
-  }
+# 1. 갤러리 이미지를 안전하게 저장할 폴더 생성
+os.makedirs('assets/gallery', exist_ok=True)
 
-  .gallery-item .caption {
-    position: absolute; 
-    bottom: 0; left: 0; right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
-    color: #fff; 
-    padding: 30px 16px 12px; 
-    font-size: 15px; 
-    font-weight: 500;
-    opacity: 0; 
-    transition: opacity 0.3s ease;
-    pointer-events: none; 
-  }
-  
-  .gallery-item:hover .caption { 
-    opacity: 1; 
-  }
+gallery_data = []
+img_counter = 1
 
-  /* 💡 원본 크기를 위해 수정된 팝업(모달) 창 스타일 */
-  .modal-overlay {
-    display: none; 
-    position: fixed; 
-    top: 0; left: 0; width: 100%; height: 100%; 
-    background-color: rgba(0, 0, 0, 0.9); 
-    z-index: 9999; 
+print("🚀 알려주신 고유 번호(35~2번)로 원본 사진 다이렉트 추출을 시작합니다...\n")
+
+# 💡 핵심: 목록 페이지를 거치지 않고, 35번부터 2번까지 직접 접속합니다!
+for wr_id in range(35, 1, -1):
+    url = f"http://laibi.yonsei.ac.kr/bbs/board.php?bo_table=sub4_1&wr_id={wr_id}"
     
-    /* 화면보다 큰 원본 사진을 위해 스크롤 허용 */
-    overflow: auto; 
-    padding: 50px; 
-    box-sizing: border-box;
-  }
+    try:
+        response = requests.get(url)
+        response.encoding = 'utf-8'
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        # 삭제된 글이거나 에러 페이지면 건너뛰기
+        if "존재하지 않" in response.text or "삭제된" in response.text:
+            continue
+            
+        # 1. 제목 추출
+        title_tag = soup.find(class_=re.compile('bo_v_tit|title', re.I))
+        if title_tag:
+            title = title_tag.get_text(strip=True).replace('\n', ' ')
+        else:
+            # 적절한 태그가 없으면 브라우저 탭 이름(<title>)에서 가져오기
+            title = soup.title.get_text(strip=True).split('>')[0].split('|')[0].strip() if soup.title else f"Gallery {img_counter}"
 
-  /* 💡 원본 크기로 뜨는 사진 영역 */
-  .modal-content {
-    display: block;
-    margin: 0 auto; /* 가운데 정렬 */
-    
-    /* 기존의 90% 제한을 풀어서 원본 크기 그대로 출력되게 함 */
-    max-width: none; 
-    max-height: none; 
-    
-    border-radius: 4px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
-    animation: zoomIn 0.3s ease; 
-  }
+        # 2. 고화질 원본 사진 링크 추출 (그누보드 공식 해제)
+        high_res_url = None
+        
+        # 패턴 1: 원본 보기 링크 (view_image.php?fn=진짜파일명.jpg)
+        view_img_link = soup.find('a', href=re.compile(r'view_image\.php\?.*fn=([^&"\']+)'))
+        
+        if view_img_link:
+            fn_match = re.search(r'fn=([^&"\']+)', view_img_link['href'])
+            if fn_match:
+                fn = fn_match.group(1)
+                # 썸네일(thumb-)이 아닌 진짜 원본 파일 주소
+                high_res_url = f"http://laibi.yonsei.ac.kr/data/file/sub4_1/{fn}"
+        
+        # 패턴 2: 원본 보기 링크가 없는 경우, 본문 이미지 중 가장 큰 것
+        if not high_res_url:
+            content_area = soup.find(id='bo_v_con') or soup.body
+            if content_area:
+                first_img = content_area.find('img', src=re.compile(r'data/file/sub4_1/'))
+                if first_img:
+                    high_res_url = first_img['src']
+                    if not high_res_url.startswith('http'):
+                        high_res_url = urllib.parse.urljoin("http://laibi.yonsei.ac.kr", high_res_url)
+                        
+                    # 만약 썸네일 경로라면 원본 경로로 억지로 변환
+                    if 'thumb-' in high_res_url:
+                        # 예: thumb-xxx_600x400.jpg -> xxx.jpg 로 변환하는 로직
+                        high_res_url = re.sub(r'/thumb-([^_]+)_.+', r'/\1', high_res_url)
 
-  /* 💡 스크롤해도 항상 고정되어 있는 닫기(X) 버튼 */
-  .modal-close {
-    position: fixed; 
-    top: 20px;
-    right: 30px;
-    color: white;
-    font-size: 45px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.2s;
-    line-height: 1;
-    z-index: 10000;
-  }
+        # 3. 사진 다운로드 및 저장
+        if high_res_url:
+            ext = high_res_url.split('.')[-1][:3].lower()
+            if ext not in ['jpg', 'png', 'gif', 'jpe']:
+                ext = 'jpg'
+                
+            local_filename = f"assets/gallery/photo_{img_counter:03d}.{ext}"
+            
+            print(f"[{wr_id}번 게시글] '{title}' 원본 다운로드 중...")
+            
+            img_data = requests.get(high_res_url).content
+            with open(local_filename, 'wb') as f:
+                f.write(img_data)
+                
+            gallery_data.append({
+                "title": title,
+                "image": local_filename
+            })
+            img_counter += 1
+            
+    except Exception as e:
+        print(f" -> 에러 발생 (게시글 {wr_id}번): {e}")
+        
+    time.sleep(0.5) # 서버 보호
 
-  .modal-close:hover {
-    color: #bbb;
-  }
+# 자바스크립트 파일(gallery_data.js) 생성
+js_content = "const photos = [\n"
+for item in gallery_data:
+    title_esc = item['title'].replace("'", "\\'")
+    js_content += f"  {{ title: '{title_esc}', image: '{item['image']}' }},\n"
+js_content += "];\n"
 
-  @keyframes zoomIn {
-    from { transform: scale(0.95); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
-</style>
-</head>
-<body>
-<div id="site-nav"></div>
+with open("gallery_data.js", "w", encoding="utf-8") as f:
+    f.write(js_content)
 
-<div class="page-header">
-  <h1>Gallery</h1>
-  <p>Lab events and activities</p>
-</div>
-
-<div class="container">
-  <section class="section">
-    <div class="gallery-grid" id="gallery-grid"></div>
-  </section>
-</div>
-
-<div id="image-modal" class="modal-overlay" onclick="closeModal()">
-  <span class="modal-close" onclick="closeModal()">&times;</span>
-  <img id="modal-img" class="modal-content" src="" alt="Full size image" onclick="event.stopPropagation()">
-</div>
-
-<div id="site-footer"></div>
-
-<script src="components.js"></script>
-<script src="gallery_data.js"></script>
-<script>
-initPage('Gallery');
-
-// HTML 화면에 사진들을 그려주는 함수
-document.getElementById('gallery-grid').innerHTML = photos.map((p) => `
-  <div class="gallery-item" onclick="openModal('${p.image}')">
-    <img src="${p.image}" alt="${p.title}" onerror="this.src='assets/placeholder.jpg'">
-    <div class="caption">${p.title}</div>
-  </div>
-`).join('');
-
-// 팝업을 여는 함수
-function openModal(imageSrc) {
-  const modal = document.getElementById('image-modal');
-  const modalImg = document.getElementById('modal-img');
-  
-  modalImg.src = imageSrc; 
-  modal.style.display = 'block'; // flex에서 block으로 변경 (스크롤 문제 해결)
-}
-
-// 팝업을 닫는 함수
-function closeModal() {
-  const modal = document.getElementById('image-modal');
-  modal.style.display = 'none'; 
-}
-</script>
-</body>
-</html>
+print(f"\n✅ 완벽합니다! 총 {len(gallery_data)}개의 원본 사진을 'assets/gallery/'에 저장 완료했습니다.")
