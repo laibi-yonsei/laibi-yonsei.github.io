@@ -15,7 +15,6 @@
 </div>
 
 <div class="container">
-  <!-- International Patents -->
   <section class="section">
     <h2 class="section-title">International Patents</h2>
     <table class="data-table">
@@ -24,7 +23,6 @@
     </table>
   </section>
 
-  <!-- Domestic Patents -->
   <section class="section">
     <h2 class="section-title">Domestic Patents</h2>
     <table class="data-table">
@@ -40,15 +38,30 @@
 <script>
 initPage('Patents');
 
+// 번호 체계가 다른 18번 특허는 국제 특허로 분류했습니다.
 const intlPatents = [
-  { title: 'AI-based Medical Image Diagnostic System', inventors: 'S. Yang, A. Kim', regNo: 'US-XXXX-XXXX', status: 'Registered', year: '2025' },
-  { title: 'Clinical NLP Pipeline for EHR Data Extraction', inventors: 'S. Yang, B. Lee', regNo: '—', status: 'Pending', year: '2025' },
+  { title: '목시플록사신을 이용한 생체조직표면 세포 영상검사장치 및 목시플록사신을 이용한 생체조직표면 세포 영상검사방법', inventors: '김기현, 이중빈, 김성한, 윤창호, 양세정', regNo: '12,320,732', status: 'Grant', year: '2025' }
 ];
 
+// 나머지 1번~17번 특허는 국내 특허로 분류했습니다. (최신순)
 const domesticPatents = [
-  { title: '다중 모달 건강 데이터 융합 방법', inventors: '양세정, 박OO', regNo: '10-XXXX-XXXXXXX', status: 'Registered', year: '2024' },
-  { title: '자동 병리 보고서 생성 시스템', inventors: '양세정, 최OO', regNo: '—', status: 'Pending', year: '2024' },
-  { title: 'AI 기반 의료 영상 진단 보조 시스템', inventors: '양세정, 김OO', regNo: '10-XXXX-XXXXXXX', status: 'Registered', year: '2023' },
+  { title: '저차원 재료의 원자 이미지 분석 방법', inventors: '양세정, 한중훈, 추유성, 최시영, Okello NgomeODONGO FRANCIS, 양동환, 고경준, 김기엽', regNo: '102253227', status: 'Grant', year: '2021' },
+  { title: '주사투과전자현미경 이미지에서의 원자 구조 해석 방법', inventors: '양세정, 고경준, 양동환, 최시영, 한중훈, 이지영, 안홍기', regNo: '102338050', status: 'Grant', year: '2021' },
+  { title: '관상동맥 조영 영상을 이용한 심장 협착증 진단 알고리즘', inventors: '양세정, 윤영진, 이지영, 안홍기, 박무열, 이채원', regNo: '102361354', status: 'Grant', year: '2022' },
+  { title: '딥러닝을 이용한 흑색종 진단 방법', inventors: '양세정, 정기양, 오병호, 이솔암, 고상백, 유상균, 추유성', regNo: '102297242', status: 'Grant', year: '2021' },
+  { title: '피부로부터 상처를 분할하기 위한 영상 처리 방법 및 영상 처리 장치', inventors: '양세정, 이하늘, 이병욱', regNo: '1016618530000', status: 'Grant', year: '2016' },
+  { title: '흑색종의 병변 판단 장치 및 방법', inventors: '양세정, 오병호, 이병욱, 정기양, 함성원', regNo: '1016121880000', status: 'Grant', year: '2016' },
+  { title: '채도 향상을 위한 영상 처리 장치 및 방법', inventors: '양세정, 이병욱', regNo: '1013593700000', status: 'Grant', year: '2014' },
+  { title: 'MRI 용 귀덮개(EAR COVER FOR MRI)', inventors: '양세정, 김동현, 김한성, 김민오, 양승욱, 조웅희', regNo: '1011185470000', status: 'Grant', year: '2012' },
+  { title: '실제배출유량률 표시형 볼밸브', inventors: '양세정', regNo: '1010506370000', status: 'Grant', year: '2011' },
+  { title: '카메라 색상 특성 곡선을 이용한 영상 밝기 변화에 따른 색 보정 방법', inventors: '양세정, 이병욱, 김윤아', regNo: '1010056250000', status: 'Grant', year: '2010' },
+  { title: '정준부호숫자를 이용한 가역 색상 변환 방법', inventors: '양세정, 이병욱', regNo: '1009824420000', status: 'Grant', year: '2010' },
+  { title: '워엄 기어형 정량 조절밸브', inventors: '양세정', regNo: '1008643540000', status: 'Grant', year: '2008' },
+  { title: '소방용 발광 템퍼 밸브', inventors: '양세정', regNo: '1008350890000', status: 'Grant', year: '2008' },
+  { title: '버터 플라이 밸브', inventors: '양세정', regNo: '1007264440000', status: 'Grant', year: '2007' },
+  { title: '동파이프용 절연 버터플라이 밸브', inventors: '양세정', regNo: '1006945060000', status: 'Grant', year: '2007' },
+  { title: '레버형 정량 조절용 버터플라이 밸브', inventors: '양세정', regNo: '1006636380000', status: 'Grant', year: '2006' },
+  { title: '보간 필터를 구비한 CIC 필터 및 그 설계방법', inventors: '장영범, 양세정', regNo: '1006289410000', status: 'Grant', year: '2006' }
 ];
 
 function renderTable(id, patents) {
@@ -58,7 +71,7 @@ function renderTable(id, patents) {
       <td><strong>${p.title}</strong></td>
       <td>${p.inventors}</td>
       <td style="font-size:13px;color:var(--gray-light);">${p.regNo}</td>
-      <td><span class="badge ${p.status === 'Registered' ? 'badge--green' : 'badge--orange'}">${p.status}</span></td>
+      <td><span class="badge ${p.status === 'Grant' ? 'badge--green' : 'badge--orange'}">${p.status}</span></td>
       <td>${p.year}</td>
     </tr>
   `).join('');
