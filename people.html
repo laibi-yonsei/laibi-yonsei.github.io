@@ -17,51 +17,48 @@
 <div class="container">
   <!-- Faculty -->
   <section class="section">
-    <h2 class="section-title">Faculty</h2>
-    <div style="display: flex; flex-direction: column; gap: 32px;">
+    <h2 class="section-title">Faculty</h2>
+        <div style="display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap;">
 
-      <!-- Prof. Sejung Yang -->
-      <div style="display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap;">
-        <div class="person-placeholder" style="width: 180px; height: 220px; border-radius: 8px;">Photo</div>
-        <div>
-          <h3 style="font-size: 24px; color: var(--blue); margin-bottom: 4px;">Prof. Sejung Yang</h3>
-          <p style="font-size: 15px; color: var(--gray); margin-bottom: 4px;">Department of Precision Medicine</p>
-          <p style="font-size: 14px; color: var(--gray-light); margin-bottom: 12px;">
-            <a href="mailto:syang@yonsei.ac.kr">syang@yonsei.ac.kr</a>
-          </p>
-          <a href="#" class="badge" style="text-decoration:none;">Google Scholar</a>
-        </div>
-      </div>
+                  <div style="display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; min-width: 250px;">
+                <div class="person-placeholder" style="width: 180px; height: 220px; border-radius: 8px; margin-bottom: 20px;">Photo</div>
+        <div>
+          <h3 style="font-size: 24px; color: var(--blue); margin-bottom: 4px;">Prof. Sejung Yang</h3>
+          <p style="font-size: 15px; color: var(--gray); margin-bottom: 4px;">Department of Precision Medicine</p>
+          <p style="font-size: 14px; color: var(--gray-light); margin-bottom: 16px;">
+            <a href="mailto:syang@yonsei.ac.kr">syang@yonsei.ac.kr</a>
+          </p>
+          <a href="#" class="badge" style="text-decoration:none; display: inline-block;">Google Scholar</a>
+        </div>
+      </div>
 
-      <!-- Prof. Placeholder 2 -->
-      <div style="display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap;">
-        <div class="person-placeholder" style="width: 180px; height: 220px; border-radius: 8px;">Photo</div>
-        <div>
-          <h3 style="font-size: 24px; color: var(--blue); margin-bottom: 4px;">Prof. (Name)</h3>
-          <p style="font-size: 15px; color: var(--gray); margin-bottom: 4px;">Department of Precision Medicine</p>
-          <p style="font-size: 14px; color: var(--gray-light); margin-bottom: 12px;">
-            <a href="mailto:email@yonsei.ac.kr">email@yonsei.ac.kr</a>
-          </p>
-          <a href="#" class="badge" style="text-decoration:none;">Google Scholar</a>
-        </div>
-      </div>
+            <div style="display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; min-width: 250px;">
+        <div class="person-placeholder" style="width: 180px; height: 220px; border-radius: 8px; margin-bottom: 20px;">Photo</div>
+        <div>
+          <h3 style="font-size: 24px; color: var(--blue); margin-bottom: 4px;">Prof. (Name)</h3>
+          <p style="font-size: 15px; color: var(--gray); margin-bottom: 4px;">Department of Precision Medicine</p>
+          <p style="font-size: 14px; color: var(--gray-light); margin-bottom: 16px;">
+            <a href="mailto:email@yonsei.ac.kr">email@yonsei.ac.kr</a>
+          </p>
+          <a href="#" class="badge" style="text-decoration:none; display: inline-block;">Google Scholar</a>
+        </div>
+      </div>
 
-      <!-- Prof. Placeholder 3 -->
-      <div style="display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap;">
-        <div class="person-placeholder" style="width: 180px; height: 220px; border-radius: 8px;">Photo</div>
-        <div>
-          <h3 style="font-size: 24px; color: var(--blue); margin-bottom: 4px;">Prof. (Name)</h3>
-          <p style="font-size: 15px; color: var(--gray); margin-bottom: 4px;">Department of Precision Medicine</p>
-          <p style="font-size: 14px; color: var(--gray-light); margin-bottom: 12px;">
-            <a href="mailto:email@yonsei.ac.kr">email@yonsei.ac.kr</a>
-          </p>
-          <a href="#" class="badge" style="text-decoration:none;">Google Scholar</a>
-        </div>
-      </div>
+            <div style="display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; min-width: 250px;">
+        <div class="person-placeholder" style="width: 180px; height: 220px; border-radius: 8px; margin-bottom: 20px;">Photo</div>
+        <div>
+          <h3 style="font-size: 24px; color: var(--blue); margin-bottom: 4px;">Prof. (Name)</h3>
+          <p style="font-size: 15px; color: var(--gray); margin-bottom: 4px;">Department of Precision Medicine</p>
+          <p style="font-size: 14px; color: var(--gray-light); margin-bottom: 16px;">
+            <a href="mailto:email@yonsei.ac.kr">email@yonsei.ac.kr</a>
+          </p>
+          <a href="#" class="badge" style="text-decoration:none; display: inline-block;">Google Scholar</a>
+        </div>
+      </div>
 
-    </div>
-  </section>
-
+    </div>
+  </section>
+  
   <!-- Current Members -->
   <section class="section">
     <h2 class="section-title">Current Members</h2>
@@ -91,19 +88,19 @@ initPage('People');
 
 const phdStudents = [
   { name: 'Sena Lee', topic: 'Medical AI' },
-  { name: 'Jiseung Ryu', topic: 'Clinical NLP' },
-  { name: 'Yerin Lee', topic: 'Healthcare Data' },
-  { name: 'Jin Gyo Jeong', topic: 'Healthcare Data' },
-  { name: 'Hyunyoung Kang', topic: 'Healthcare Data' },
-  { name: 'Geunhye Kim', topic: 'Healthcare Data' },
-  { name: 'Younghyun Park', topic: 'Healthcare Data' },
-  { name: 'Janghoon Ru', topic: 'Healthcare Data' },
+  { name: 'Jiseung Ryu', topic: 'Medical AI' },
+  { name: 'Yerin Lee', topic: 'Medical AI' },
+  { name: 'Jin Gyo Jeong', topic: 'Medical AI' },
+  { name: 'Hyunyoung Kang', topic: 'Medical AI' },
+  { name: 'Geunhye Kim', topic: 'Medical AI' },
+  { name: 'Younghyun Park', topic: 'Medical AI' },
+  { name: 'Janghoon Ru', topic: 'Medical AI' },
 ];
 
 const msStudents = [
-  { name: 'Hyun min Bae', topic: 'Medical Imaging' },
-  { name: 'Hee Jae Lee', topic: 'Precision Medicine' },
-  { name: 'Hyun Mun', topic: 'Biomedical NLP' },
+  { name: 'Hyun min Bae', topic: 'Medical AI' },
+  { name: 'Hee Jae Lee', topic: 'Medical AI' },
+  { name: 'Hyun Mun', topic: 'Medical AI' },
 ];
 
 document.getElementById('phd-grid').innerHTML = phdStudents.map(m => `
