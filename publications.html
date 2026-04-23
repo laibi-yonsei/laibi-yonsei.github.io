@@ -64,7 +64,6 @@ function render() {
   // 결과 리스트 렌더링
   document.getElementById('pub-list').innerHTML = filtered.map(p => `
     <div class="pub-entry">
-      <div class="pub-thumb" style="display:flex;align-items:center;justify-content:center;color:var(--gray-light);font-size:12px;">fig</div>
       <div>
         <div class="pub-title">${p.title}</div>
         <div class="pub-authors">${p.authors}</div>
