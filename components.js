@@ -6,6 +6,7 @@ function renderNav(activePage) {
     { name: 'People', href: 'people.html' },
     { name: 'Publications', href: 'publications.html' },
     { name: 'Patents', href: 'patents.html' },
+    { name: 'Awards', href: 'awards.html' },
     { name: 'Projects', href: 'projects.html' },
     { name: 'Gallery', href: 'gallery.html' },
     { name: 'Apply', href: 'apply.html' },
