@@ -6,31 +6,31 @@
 <title>Gallery – LAIBI</title>
 <link rel="stylesheet" href="styles.css" />
 <style>
-  /* 실제 사진을 위한 세련된 갤러리 디자인 업그레이드 */
+  /* 갤러리 기본 디자인 */
   .gallery-item { 
     position: relative; 
     overflow: hidden; 
     border-radius: 8px; 
-    background-color: #f8f9fa; /* 사진 로딩 전 배경색 */
+    background-color: #f8f9fa; 
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    cursor: pointer; /* 마우스를 올리면 손가락 모양으로 변경 */
   }
   
   .gallery-item img {
     width: 100%;
-    height: 240px; /* 사진 높이 고정 (원하시는 대로 조절 가능) */
-    object-fit: cover; /* 세로나 가로로 긴 사진도 찌그러지지 않고 꽉 차게 잘라줌 */
+    height: 240px; 
+    object-fit: cover; 
     display: block;
     transition: transform 0.4s ease;
   }
   
   .gallery-item:hover img {
-    transform: scale(1.05); /* 마우스 올렸을 때 사진이 살짝 커지는 효과 */
+    transform: scale(1.05); 
   }
 
   .gallery-item .caption {
     position: absolute; 
     bottom: 0; left: 0; right: 0;
-    /* 글씨가 잘 보이도록 아래쪽에서 위로 자연스럽게 어두워지는 그라데이션 */
     background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
     color: #fff; 
     padding: 40px 16px 16px; 
@@ -38,11 +38,56 @@
     font-weight: 500;
     opacity: 0; 
     transition: opacity 0.3s ease;
-    pointer-events: none; /* 텍스트 위에서도 마우스 효과가 유지되도록 함 */
+    pointer-events: none; 
   }
   
   .gallery-item:hover .caption { 
     opacity: 1; 
+  }
+
+  /* 💡 새로 추가된 팝업(모달) 창 스타일 */
+  .modal-overlay {
+    display: none; /* 평소에는 숨김 */
+    position: fixed; 
+    top: 0; left: 0; width: 100%; height: 100%; 
+    background-color: rgba(0, 0, 0, 0.85); /* 반투명 검은 배경 */
+    z-index: 9999; /* 화면 맨 앞으로 가져오기 */
+    justify-content: center; 
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  /* 큰 사진이 뜨는 영역 */
+  .modal-content {
+    max-width: 90%; 
+    max-height: 90vh; /* 화면 높이의 90%까지만 커지도록 제한 */
+    object-fit: contain; /* 찌그러지지 않고 원본 비율 유지 */
+    border-radius: 4px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    animation: zoomIn 0.3s ease; /* 부드럽게 튀어나오는 효과 */
+  }
+
+  /* 닫기(X) 버튼 */
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .modal-close:hover {
+    color: #bbb;
+  }
+
+  /* 팝업이 뜰 때 부드럽게 커지는 애니메이션 */
+  @keyframes zoomIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
   }
 </style>
 </head>
@@ -60,6 +105,11 @@
   </section>
 </div>
 
+<div id="image-modal" class="modal-overlay" onclick="closeModal()">
+  <span class="modal-close" onclick="closeModal()">&times;</span>
+  <img id="modal-img" class="modal-content" src="" alt="Full size image">
+</div>
+
 <div id="site-footer"></div>
 
 <script src="components.js"></script>
@@ -69,11 +119,26 @@ initPage('Gallery');
 
 // HTML 화면에 사진들을 그려주는 함수
 document.getElementById('gallery-grid').innerHTML = photos.map((p) => `
-  <div class="gallery-item">
+  <div class="gallery-item" onclick="openModal('${p.image}')">
     <img src="${p.image}" alt="${p.title}" onerror="this.src='assets/placeholder.jpg'">
     <div class="caption">${p.title}</div>
   </div>
 `).join('');
+
+// 💡 팝업을 여는 함수
+function openModal(imageSrc) {
+  const modal = document.getElementById('image-modal');
+  const modalImg = document.getElementById('modal-img');
+  
+  modalImg.src = imageSrc; // 클릭한 사진의 주소를 팝업창 사진 주소로 전달
+  modal.style.display = 'flex'; // 숨겨져 있던 팝업창을 화면에 띄움
+}
+
+// 💡 팝업을 닫는 함수
+function closeModal() {
+  const modal = document.getElementById('image-modal');
+  modal.style.display = 'none'; // 팝업창을 다시 숨김
+}
 </script>
 </body>
 </html>
