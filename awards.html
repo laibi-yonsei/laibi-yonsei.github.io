@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Awards – LAIBI</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  /* 특허 페이지와 동일한 좌우 분리형 리스트 디자인 */
+  .award-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .award-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    padding: 24px 0;
+    border-bottom: 1px solid #eaeaea; 
+    gap: 24px;
+    transition: background-color 0.2s;
+  }
+  
+  .award-entry:hover {
+    background-color: #fafafa;
+  }
+
+  .award-info {
+    flex: 1; 
+  }
+
+  .award-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+
+  .award-details {
+    font-size: 14px;
+    color: #666; 
+  }
+  
+  /* 포인트를 주는 기관명 강조 스타일 */
+  .award-org {
+    color: var(--blue);
+    font-weight: 500;
+    margin-left: 8px;
+  }
+
+  .award-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end; 
+  }
+
+  .award-badge {
+    background-color: #fdf6f0; /* 수상 내역에 맞게 따뜻한 톤의 뱃지 배경색 */
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap; 
+  }
+
+  .badge-label {
+    color: #c46210; /* 골드/오렌지 빛 포인트 라벨 */
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* 반응형 처리 */
+  @media (max-width: 768px) {
+    .award-entry {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .award-meta {
+      justify-content: flex-start;
+    }
+  }
+</style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<div class="page-header">
+  <h1>Awards</h1>
+  <p>Honors and Recognitions</p>
+</div>
+
+<div class="container">
+  <section class="section">
+    <div class="filter-pills" id="year-filter" style="margin-bottom: 24px;"></div>
+    
+    <div class="award-list" id="award-list"></div>
+  </section>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="components.js"></script>
+<script src="awards_data.js"></script>
+<script>
+initPage('Awards');
+
+// 연도 필터 버튼 생성 (내림차순)
+const years = ['All', ...new Set(awards.map(a => a.year))].map(String);
+years.sort((a, b) => a === 'All' ? -1 : b - a);
+
+let activeYear = 'All';
+
+function renderAwards() {
+  // 1. 필터 버튼 렌더링
+  document.getElementById('year-filter').innerHTML = years.map(y =>
+    `<button class="filter-pill ${y === activeYear ? 'active' : ''}" onclick="filterYear('${y}')">${y}</button>`
+  ).join('');
+
+  // 2. 선택된 연도에 맞게 데이터 필터링
+  const filtered = activeYear === 'All' ? awards : awards.filter(a => String(a.year) === activeYear);
+  
+  // 3. 화면에 수상 내역 출력
+  document.getElementById('award-list').innerHTML = filtered.map((a) => `
+    <div class="award-entry">
+      <div class="award-info">
+        <div class="award-title">${a.title}</div>
+        <div class="award-details">
+          <span>수상자: <strong>${a.recipient}</strong></span>
+          <span class="award-org">| ${a.organization}</span>
+        </div>
+      </div>
+      <div class="award-meta">
+        <div class="award-badge"><span class="badge-label">Year</span> ${a.year}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterYear(y) { 
+  activeYear = y; 
+  renderAwards(); 
+}
+
+// 초기 실행
+renderAwards();
+</script>
+</body>
+</html>
