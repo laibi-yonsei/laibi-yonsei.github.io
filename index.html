@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="LAIBI – Lab of AI in Biomedical Informatics" />
+<meta property="og:description" content="연세대학교 의료정보 인공지능 연구실 (LAIBI) - 의료 영상 분석, 임상 NLP, 정밀 의료 연구" />
+<meta property="og:image" content="http://laibi.yonsei.ac.kr/assets/laibi-circle-logo.png" />
+<meta property="og:url" content="http://laibi.yonsei.ac.kr" />
+
 <title>LAIBI – Lab of AI in Biomedical Informatics</title>
 <link rel="stylesheet" href="styles.css" />
 </head>
@@ -88,7 +95,6 @@ let newsShown = 4;
 
 function renderNews() {
   const list = document.getElementById('news-list');
-  // 불러온 newsData 변수를 그대로 사용합니다.
   list.innerHTML = newsData.slice(0, newsShown).map(n =>
     `<div style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid #f0f0f0;font-size:14px;">
       <span style="color:var(--gray-light);min-width:80px;font-weight:500;">${n.date}</span>
