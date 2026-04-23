@@ -6,120 +6,88 @@
 <title>Gallery – LAIBI</title>
 <link rel="stylesheet" href="styles.css" />
 <style>
-  /* 💡 보내주신 이미지의 감성을 그대로 담은 목록형 디자인 */
-  .gallery-list {
-    display: flex;
-    flex-direction: column;
+  /* 갤러리 기본 디자인 */
+  .gallery-item { 
+    position: relative; 
+    overflow: hidden; 
+    border-radius: 8px; 
+    background-color: #f8f9fa; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    cursor: pointer; /* 마우스를 올리면 손가락 모양으로 변경 */
   }
   
-  .gallery-entry {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
-    border-bottom: 1px solid #eaeaea;
-    gap: 20px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+  .gallery-item img {
+    width: 100%;
+    height: 240px; 
+    object-fit: cover; 
+    display: block;
+    transition: transform 0.4s ease;
   }
   
-  .gallery-entry:hover {
-    background-color: #fafafa;
+  .gallery-item:hover img {
+    transform: scale(1.05); 
   }
 
-  .entry-left {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    flex: 1;
+  .gallery-item .caption {
+    position: absolute; 
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+    color: #fff; 
+    padding: 40px 16px 16px; 
+    font-size: 15px; 
+    font-weight: 500;
+    opacity: 0; 
+    transition: opacity 0.3s ease;
+    pointer-events: none; 
+  }
+  
+  .gallery-item:hover .caption { 
+    opacity: 1; 
   }
 
-  /* 섬네일 이미지 스타일 */
-  .entry-thumb {
-    width: 120px;
-    height: 80px;
-    border-radius: 6px;
-    object-fit: cover;
-    background-color: #f4f4f4;
-    flex-shrink: 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  }
-
-  .entry-info {
-    flex: 1;
-  }
-
-  .entry-title {
-    font-size: 17px;
-    font-weight: 600;
-    color: #222;
-    margin-bottom: 4px;
-    line-height: 1.4;
-  }
-
-  .entry-desc {
-    font-size: 14px;
-    color: #888;
-  }
-
-  /* 우측 뱃지 영역 (이미지 캡처본 스타일) */
-  .entry-meta {
-    display: flex;
-    gap: 10px;
-  }
-
-  .entry-badge {
-    background-color: #f1f3f5;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 13px;
-    color: #333;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .badge-label {
-    color: #999;
-    font-weight: 600;
-    font-size: 11px;
-    text-transform: uppercase;
-  }
-
-  /* 💡 팝업(모달) 스타일 유지 */
+  /* 💡 새로 추가된 팝업(모달) 창 스타일 */
   .modal-overlay {
-    display: none;
+    display: none; /* 평소에는 숨김 */
     position: fixed; 
     top: 0; left: 0; width: 100%; height: 100%; 
-    background-color: rgba(0, 0, 0, 0.9);
-    z-index: 9999; 
-    justify-content: center; align-items: center;
+    background-color: rgba(0, 0, 0, 0.85); /* 반투명 검은 배경 */
+    z-index: 9999; /* 화면 맨 앞으로 가져오기 */
+    justify-content: center; 
+    align-items: center;
     padding: 20px;
+    box-sizing: border-box;
   }
 
+  /* 큰 사진이 뜨는 영역 */
   .modal-content {
-    max-width: 95%; max-height: 90vh;
-    object-fit: contain;
-    animation: zoomIn 0.3s ease;
+    max-width: 90%; 
+    max-height: 90vh; /* 화면 높이의 90%까지만 커지도록 제한 */
+    object-fit: contain; /* 찌그러지지 않고 원본 비율 유지 */
     border-radius: 4px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    animation: zoomIn 0.3s ease; /* 부드럽게 튀어나오는 효과 */
   }
 
+  /* 닫기(X) 버튼 */
   .modal-close {
-    position: absolute; top: 20px; right: 30px;
-    color: white; font-size: 40px; cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
   }
 
+  .modal-close:hover {
+    color: #bbb;
+  }
+
+  /* 팝업이 뜰 때 부드럽게 커지는 애니메이션 */
   @keyframes zoomIn {
-    from { transform: scale(0.95); opacity: 0; }
+    from { transform: scale(0.9); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
-  }
-
-  /* 반응형 처리 */
-  @media (max-width: 768px) {
-    .gallery-entry { flex-direction: column; align-items: flex-start; }
-    .entry-meta { margin-top: 10px; width: 100%; justify-content: flex-start; }
-    .entry-thumb { width: 100px; height: 65px; }
   }
 </style>
 </head>
@@ -133,13 +101,13 @@
 
 <div class="container">
   <section class="section">
-    <div class="gallery-list" id="gallery-list"></div>
+    <div class="gallery-grid" id="gallery-grid"></div>
   </section>
 </div>
 
 <div id="image-modal" class="modal-overlay" onclick="closeModal()">
   <span class="modal-close" onclick="closeModal()">&times;</span>
-  <img id="modal-img" class="modal-content" src="">
+  <img id="modal-img" class="modal-content" src="" alt="Full size image">
 </div>
 
 <div id="site-footer"></div>
@@ -149,42 +117,27 @@
 <script>
 initPage('Gallery');
 
-// 새롭게 바뀐 리스트 스타일로 화면 그리기
-document.getElementById('gallery-list').innerHTML = photos.map((p) => {
-  // 제목에서 연도(예: 2025)를 추출하거나, 없으면 기본값을 표시합니다.
-  const yearMatch = p.title.match(/\d{4}/);
-  const year = yearMatch ? yearMatch[0] : 'Event';
+// HTML 화면에 사진들을 그려주는 함수
+document.getElementById('gallery-grid').innerHTML = photos.map((p) => `
+  <div class="gallery-item" onclick="openModal('${p.image}')">
+    <img src="${p.image}" alt="${p.title}" onerror="this.src='assets/placeholder.jpg'">
+    <div class="caption">${p.title}</div>
+  </div>
+`).join('');
 
-  return `
-    <div class="gallery-entry" onclick="openModal('${p.image}')">
-      <div class="entry-left">
-        <img src="${p.image}" class="entry-thumb" onerror="this.src='assets/placeholder.jpg'">
-        <div class="entry-info">
-          <div class="entry-title">${p.title}</div>
-          <div class="entry-desc">Lab Activity & Research Record</div>
-        </div>
-      </div>
-      
-      <div class="entry-right">
-        <div class="entry-meta">
-          <div class="entry-badge">
-            <span class="badge-label">DATE</span> ${year}
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-}).join('');
-
+// 💡 팝업을 여는 함수
 function openModal(imageSrc) {
   const modal = document.getElementById('image-modal');
   const modalImg = document.getElementById('modal-img');
-  modalImg.src = imageSrc;
-  modal.style.display = 'flex';
+  
+  modalImg.src = imageSrc; // 클릭한 사진의 주소를 팝업창 사진 주소로 전달
+  modal.style.display = 'flex'; // 숨겨져 있던 팝업창을 화면에 띄움
 }
 
+// 💡 팝업을 닫는 함수
 function closeModal() {
-  document.getElementById('image-modal').style.display = 'none';
+  const modal = document.getElementById('image-modal');
+  modal.style.display = 'none'; // 팝업창을 다시 숨김
 }
 </script>
 </body>
