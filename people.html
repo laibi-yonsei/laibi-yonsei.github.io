@@ -17,7 +17,7 @@
 <div class="container">
   <section class="section">
     <h2 class="section-title">Faculty</h2>
-    <div style="display: flex; justify-content: center; gap: 32px;">
+    <div style="display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;">
       
       <div style="display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; min-width: 250px;">
         <img src="assets/sejung.jpg" alt="Prof. Sejung Yang" style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; background-color: #f0f0f0;">
@@ -82,66 +82,27 @@
 <div id="site-footer"></div>
 
 <script src="components.js"></script>
+<script src="people_data.js"></script>
 <script>
 initPage('People');
 
-// 에러 수정: 띄어쓰기 제거 및 대괄호 닫기 완료
-const postDoctors = [
-  { name: 'Junghun Han', topic: 'Medical AI', image: 'assets/junghun.jpg' },
-  { name: 'Yusung Chu', topic: 'Medical AI', image: 'assets/yu-seong.jpg' },
-];
+// 화면에 사람 카드를 그려주는 공통 함수
+function renderPeopleCards(id, peopleArray) {
+  document.getElementById(id).innerHTML = peopleArray.map(m => `
+    <div class="person-card" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+      <img src="${m.image}" alt="${m.name}" onerror="this.src='assets/placeholder.jpg'" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; background-color: #f0f0f0;">
+      <h4 style="margin-bottom: 4px;">${m.name}</h4>
+      <p style="color: var(--gray); font-size: 14px;">${m.topic}</p>
+    </div>
+  `).join('');
+}
 
-const phdStudents = [
-  { name: 'Sena Lee', topic: 'Medical AI', image: 'assets/sena.jpg' },
-  { name: 'Jiseung Ryu', topic: 'Medical AI', image: 'assets/jiseung.jpg' },
-  { name: 'Yerin Lee', topic: 'Medical AI', image: 'assets/yerin.jpg' },
-  { name: 'Jin Gyo Jeong', topic: 'Medical AI', image: 'assets/jingyo.jpg' },
-  { name: 'Hyunyoung Kang', topic: 'Medical AI', image: 'assets/hyunyoung.jpg' },
-  { name: 'Geunhye Kim', topic: 'Medical AI', image: 'assets/geunhye.jpg' },
-  { name: 'Younghyun Park', topic: 'Medical AI', image: 'assets/younghyun.jpg' },
-  { name: 'Janghoon Ru', topic: 'Medical AI', image: 'assets/janghoon.jpg' },
-];
+// 외부 파일에서 불러온 데이터를 화면에 렌더링
+renderPeopleCards('postdoc-grid', postDoctors);
+renderPeopleCards('phd-grid', phdStudents);
+renderPeopleCards('ms-grid', msStudents);
 
-const msStudents = [
-  { name: 'Hyun min Bae', topic: 'Medical AI', image: 'assets/hyunmin.jpg' },
-  { name: 'Hee Jae Lee', topic: 'Medical AI', image: 'assets/heejae.jpg' },
-  { name: 'Hyun Mun', topic: 'Medical AI', image: 'assets/hyun.jpg' },
-];
-
-// 추가됨: 박사후연구원 카드를 화면에 그려주는 코드
-document.getElementById('postdoc-grid').innerHTML = postDoctors.map(m => `
-  <div class="person-card" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <img src="${m.image}" alt="${m.name}" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; background-color: #f0f0f0;">
-    <h4 style="margin-bottom: 4px;">${m.name}</h4>
-    <p style="color: var(--gray); font-size: 14px;">${m.topic}</p>
-  </div>
-`).join('');
-
-document.getElementById('phd-grid').innerHTML = phdStudents.map(m => `
-  <div class="person-card" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <img src="${m.image}" alt="${m.name}" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; background-color: #f0f0f0;">
-    <h4 style="margin-bottom: 4px;">${m.name}</h4>
-    <p style="color: var(--gray); font-size: 14px;">${m.topic}</p>
-  </div>
-`).join('');
-
-document.getElementById('ms-grid').innerHTML = msStudents.map(m => `
-  <div class="person-card" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <img src="${m.image}" alt="${m.name}" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; background-color: #f0f0f0;">
-    <h4 style="margin-bottom: 4px;">${m.name}</h4>
-    <p style="color: var(--gray); font-size: 14px;">${m.topic}</p>
-  </div>
-`).join('');
-
-const alumni = [
-  ['이현우 (Hyunwoo Lee)', 'M.S.', '2022.02', '삼성 메디슨'],
-  ['장승현 (Seunghyun Jang)', 'M.S.', '2023.02', '서울대학교 의과대학 박사과정 진학'],
-  ['강승영 (SeungYoung Kang)', 'M.S.', '2023.02', '오스템 임플란트'],
-  ['이지영 (Jiyoung Lee)', 'M.S.', '2021.02', '삼성 메디슨'],
-  ['안홍기', 'M.S', '2021.08', '이마고웍스(주)'],
-  ['서경덕 (Kyungdeok Seo)', 'M.S', '2024.02', '오스템 임플란트'],
-];
-
+// 졸업생 테이블 렌더링
 document.querySelector('#alumni-table tbody').innerHTML = alumni.map(a =>
   `<tr>${a.map(c => `<td>${c}</td>`).join('')}</tr>`
 ).join('');
