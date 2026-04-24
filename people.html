@@ -90,6 +90,7 @@ function renderPeopleCards(id, peopleArray) {
       <img src="${m.image}" alt="${m.name}" onerror="this.src='assets/placeholder.jpg'" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; background-color: #f0f0f0;">
       <h4 style="margin-bottom: 4px;">${m.name}</h4>
       <p style="color: var(--gray); font-size: 14px;">${m.topic}</p>
+      ${m.email ? `<p style="font-size: 13px; margin-top: 4px;"><a href="mailto:${m.email}" style="color: var(--gray-light);">${m.email}</a></p>` : ''}
     </div>
   `).join('');
 }
