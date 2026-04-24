@@ -151,6 +151,19 @@ img { max-width: 100%; height: auto; }
 /* ── Project Grid ── */
 .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 
+/* ── 상단 회색 ── */
+.site-nav {
+  position: sticky; 
+  top: 0; 
+  z-index: 100;
+  
+  /* 💡 회색 음영 추가: rgba를 사용하여 약간의 투명도를 주면 뒤 배경이 살짝 비쳐 더 세련되어 보입니다. */
+  background-color: rgba(235, 235, 235, 0.97); 
+  
+  border-bottom: 1px solid var(--gray-border);
+  backdrop-filter: blur(8px); /* 뒤 배경 흐리게 처리 */
+}
+
 /* =======================================================
    📱 모바일 반응형 (Responsive Design) 
    ======================================================= */
