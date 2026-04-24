@@ -24,6 +24,7 @@ body {
   background: var(--bg);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* 💡 핵심 해결책 1: 화면 밖으로 삐져나가는 가로 공간을 강제로 잘라내어 비율 깨짐 방지 */
 }
 
 a { color: var(--blue-light); text-decoration: none; transition: color 0.2s; }
@@ -59,11 +60,14 @@ img { max-width: 100%; height: auto; }
 
 /* ── Page Header ── */
 .page-header {
-  padding: 48px 24px 32px;
+  box-shadow: 0 0 0 100vmax #f1f3f5;
+  clip-path: inset(0 -100vmax);
+  background-color: #f1f3f5; 
+  border-bottom: 1px solid var(--gray-border);
   max-width: var(--max-width);
   margin: 0 auto;
+  padding: 48px 24px 32px;
   text-align: left;
-  border-bottom: 1px solid var(--gray-border);
 }
 .page-header h1 { font-family: var(--font-serif); font-size: 36px; color: var(--blue); margin-bottom: 8px; }
 .page-header p { font-size: 16px; color: var(--gray-light); }
@@ -151,17 +155,6 @@ img { max-width: 100%; height: auto; }
 /* ── Project Grid ── */
 .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 
-/* ── Page Header ── */
-.page-header {
-  box-shadow: 0 0 0 100vmax #f1f3f5;
-  clip-path: inset(0 -100vmax);
-  background-color: #f1f3f5; 
-  border-bottom: 1px solid var(--gray-border);
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 48px 24px 32px;
-  text-align: left;
-}
 /* =======================================================
    📱 모바일 반응형 (Responsive Design) 
    ======================================================= */
@@ -188,6 +181,13 @@ img { max-width: 100%; height: auto; }
   .page-header h1 { font-size: 28px; }
   .section { padding: 32px 0; }
   .section-title { font-size: 24px; }
+
+  /* 💡 핵심 해결책 2: 모바일에서는 400px 강제 고정을 풀고, 스마트폰 화면 너비에 맞게 조절 */
+  div[style*="width: 400px"], div[style*="width: 280px"] { 
+    width: 100% !important; 
+    max-width: 250px; /* 폰에서는 로고 크기를 너무 크지 않게 적당히 조절 */
+    margin: 0 auto 20px !important; /* 가운데 정렬 */
+  }
 
   /* 가로 정렬된 요소들을 세로 정렬로 변경 */
   div[style*="display: flex"] { flex-direction: column !important; gap: 20px !important; }
