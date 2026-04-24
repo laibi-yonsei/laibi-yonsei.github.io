@@ -104,9 +104,13 @@
   border-radius: 6px;
   border-left: 3px solid var(--blue);
   transition: box-shadow 0.2s ease;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
 }
 .collab-item:hover {
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.collab-logo {
+  height: 40px; max-width: 160px; object-fit: contain; margin-bottom: 12px;
 }
 .collab-item h4 {
   font-size: 16px; font-weight: 600; color: #333; margin-bottom: 6px;
@@ -238,6 +242,7 @@ document.getElementById('collab-section').innerHTML = `
   <div class="collab-grid">
     ${collaborations.map(c => `
       <div class="collab-item">
+        ${c.logo ? `<img src="${c.logo}" alt="${c.name}" class="collab-logo" />` : ''}
         <h4>${c.name}</h4>
         <span class="collab-type ${c.type.toLowerCase()}">${c.type}</span>
         <p>${c.desc}</p>

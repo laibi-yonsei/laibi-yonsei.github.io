@@ -69,6 +69,7 @@ function render() {
         <div class="pub-authors">${p.authors}</div>
         <div class="pub-links">
           <span class="badge">${p.venue}</span>
+          ${p.type === 'Journals' && p.url ? `<a href="${p.url}" target="_blank" style="font-size:12px;font-weight:500;padding:4px 12px;border:1px solid var(--blue);border-radius:4px;color:var(--blue);transition:all 0.2s;text-decoration:none;" onmouseover="this.style.background='var(--blue)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--blue)'">Paper →</a>` : ''}
         </div>
       </div>
     </div>
