@@ -1,4 +1,5 @@
 const photos = [
+  { title: '2025 연구실 송년회', image: 'assets/gallery/photo_032.jpg' },
   { title: '2025년도 제66회 대한의용생체공학회 추계 학술대회', image: 'assets/gallery/photo_001.jpg' },
   { title: 'MICCAI 2025', image: 'assets/gallery/photo_002.jpg' },
   { title: '2025년도 대한의학영상정보학회 제 39차 학술대회', image: 'assets/gallery/photo_003.jpg' },

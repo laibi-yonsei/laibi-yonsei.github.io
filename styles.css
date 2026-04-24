@@ -155,8 +155,23 @@ img { max-width: 100%; height: auto; }
 /* ── Project Grid ── */
 .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 
+/* ── Hero Section (index.html 메인) ── */
+.hero-content {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  text-align: left;
+  max-width: 70%;
+}
+.hero-text { flex: 1; }
+.hero-logo {
+  flex-shrink: 0;
+  text-align: center;
+  width: 380px;
+}
+
 /* =======================================================
-   📱 모바일 반응형 (Responsive Design) 
+   📱 모바일 반응형 (Responsive Design)
    ======================================================= */
 @media (max-width: 768px) {
   /* 네비게이션바 변경 (햄버거 메뉴) */
@@ -182,15 +197,27 @@ img { max-width: 100%; height: auto; }
   .section { padding: 32px 0; }
   .section-title { font-size: 24px; }
 
-  /* 💡 핵심 해결책 2: 모바일에서는 400px 강제 고정을 풀고, 스마트폰 화면 너비에 맞게 조절 */
-  div[style*="width: 400px"], div[style*="width: 280px"] { 
-    width: 100% !important; 
-    max-width: 250px; /* 폰에서는 로고 크기를 너무 크지 않게 적당히 조절 */
-    margin: 0 auto 20px !important; /* 가운데 정렬 */
+  /* Hero 섹션: 세로 배치, 글 먼저 → 로고 나중 */
+  .hero-content {
+    flex-direction: column;
+    max-width: 100%;
+    gap: 24px;
+  }
+  .hero-logo {
+    width: 100%;
+    max-width: 220px;
+    margin: 0 auto;
   }
 
-  /* 가로 정렬된 요소들을 세로 정렬로 변경 */
-  div[style*="display: flex"] { flex-direction: column !important; gap: 20px !important; }
+  /* 💡 핵심 해결책 2: 모바일에서는 400px 강제 고정을 풀고, 스마트폰 화면 너비에 맞게 조절 */
+  div[style*="width: 400px"], div[style*="width: 280px"] {
+    width: 100% !important;
+    max-width: 250px;
+    margin: 0 auto 20px !important;
+  }
+
+  /* 가로 정렬된 요소들을 세로 정렬로 변경 (hero-content 제외) */
+  div[style*="display: flex"]:not(.hero-content) { flex-direction: column !important; gap: 20px !important; }
   .pub-entry { flex-direction: column; }
 
   /* 푸터 변경 */
