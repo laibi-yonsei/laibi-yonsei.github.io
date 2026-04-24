@@ -2,27 +2,27 @@
 
 // 박사후연구원
 const postDoctors = [
-  { name: 'Junghun Han', topic: 'Medical AI', image: 'assets/people/junghun.jpg' },
-  { name: 'Yusung Chu', topic: 'Medical AI', image: 'assets/people/yu-seong.jpg' },
+  { name: 'Junghun Han', topic: 'Medical AI', email:'cheque@yonsei.ac.kr', image: 'assets/people/junghun.jpg' },
+  { name: 'Yusung Chu', topic: 'Medical AI', email:'dbtjd9968@yonsei.ac.kr', image: 'assets/people/yu-seong.jpg' },
 ];
 
 // 박사과정
 const phdStudents = [
-  { name: 'Sena Lee', topic: 'Medical AI', image: 'assets/people/sena.jpg' },
-  { name: 'Jiseung Ryu', topic: 'Medical AI', image: 'assets/people/jiseung.jpg' },
-  { name: 'Yerin Lee', topic: 'Medical AI', image: 'assets/people/yerin.jpg' },
-  { name: 'Jin Gyo Jeong', topic: 'Medical AI', image: 'assets/people/jingyo.jpg' },
-  { name: 'Hyunyoung Kang', topic: 'Medical AI', image: 'assets/people/hyunyoung.jpg' },
-  { name: 'Geunhye Kim', topic: 'Medical AI', image: 'assets/people/geunhye.jpg' },
-  { name: 'Younghyun Park', topic: 'Medical AI', image: 'assets/people/younghyun.jpg' },
-  { name: 'Janghoon Ru', topic: 'Medical AI', image: 'assets/people/janghoon.jpg' },
+  { name: 'Sena Lee', topic: 'Medical AI', email:'bluesky9707@naver.com', image: 'assets/people/sena.jpg' },
+  { name: 'Jiseung Ryu', topic: 'Medical AI', email:'ryujissss@yonsei.ac.kr', image: 'assets/people/jiseung.jpg' },
+  { name: 'Yerin Lee', topic: 'Medical AI', email:'leey01@yonsei.ac.kr', image: 'assets/people/yerin.jpg' },
+  { name: 'Jin Gyo Jeong', topic: 'Medical AI', email:'wlsry4008@yonsei.ac.kr', image: 'assets/people/jingyo.jpg' },
+  { name: 'Hyunyoung Kang', topic: 'Medical AI', email:'sonya23@yonsei.ac.kr', image: 'assets/people/hyunyoung.jpg' },
+  { name: 'Geunhye Kim', topic: 'Medical AI', email:'kimgeunhye99@gmail.com', image: 'assets/people/geunhye.jpg' },
+  { name: 'Younghyun Park', topic: 'Medical AI', email:'pyh2908@yonsei.ac.kr', image: 'assets/people/younghyun.jpg' },
+  { name: 'Janghoon Ru', topic: 'Medical AI', email:'octrjh@yonsei.ac.kr', image: 'assets/people/janghoon.jpg' },
 ];
 
 // 석사과정
 const msStudents = [
-  { name: 'Hyun min Bae', topic: 'Medical AI', image: 'assets/people/hyunmin.jpg' },
-  { name: 'Hee Jae Lee', topic: 'Medical AI', image: 'assets/people/heejae.jpg' },
-  { name: 'Hyun Mun', topic: 'Medical AI', image: 'assets/people/hyun.jpg' },
+  { name: 'Hyun min Bae', topic: 'Medical AI', email:'hmbae0405@gmail.com', image: 'assets/people/hyunmin.jpg' },
+  { name: 'Hee Jae Lee', topic: 'Medical AI', email:'suiginto765@gmail.com', image: 'assets/people/heejae.jpg' },
+  { name: 'Hyun Mun', topic: 'Medical AI', email:'mun_hyun@yonsei.ac.kr', image: 'assets/people/hyun.jpg' },
 ];
 
 // 졸업생
