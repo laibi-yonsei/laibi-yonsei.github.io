@@ -203,7 +203,9 @@ img { max-width: 100%; height: auto; }
     max-width: 100%;
     gap: 24px;
   }
+  .hero-text { order: 1; }
   .hero-logo {
+    order: 2;
     width: 100%;
     max-width: 220px;
     margin: 0 auto;
