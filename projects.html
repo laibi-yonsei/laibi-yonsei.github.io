@@ -5,6 +5,86 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Projects – LAIBI</title>
 <link rel="stylesheet" href="styles.css" />
+<style>
+/* ── Project Page Styles (CVML-inspired) ── */
+.project-filters {
+  display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap;
+}
+.project-filter {
+  padding: 6px 18px; border-radius: 20px; font-size: 13px; font-weight: 500;
+  border: 1px solid var(--gray-border); color: var(--gray); background: transparent;
+  cursor: pointer; transition: all 0.2s;
+}
+.project-filter:hover { border-color: var(--blue); color: var(--blue); }
+.project-filter.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 9px;
+  padding: 24px;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  display: flex; flex-direction: column;
+}
+.project-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+.project-card-header {
+  display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px;
+}
+.project-card-icon {
+  font-size: 28px; flex-shrink: 0; margin-top: 2px;
+}
+.project-card-title {
+  font-size: 17px; font-weight: 600; color: #333; line-height: 1.4;
+}
+
+.project-card-desc {
+  font-size: 14px; color: var(--gray); line-height: 1.6; margin-bottom: 18px; flex: 1;
+}
+
+.project-card-meta {
+  margin-bottom: 16px; font-size: 13px;
+}
+.project-meta-row {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+}
+.project-meta-label {
+  font-weight: 500; color: #888; min-width: 64px;
+}
+.project-meta-value { color: #555; }
+
+.status-badge {
+  display: inline-block; padding: 2px 10px; border-radius: 12px;
+  font-size: 12px; font-weight: 500;
+}
+.status-badge.ongoing { background: #e3f2fd; color: #1976d2; }
+.status-badge.completed { background: #f3e5f5; color: #7b1fa2; }
+
+.project-card-links {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.project-link {
+  font-size: 12px; color: #666; text-decoration: none;
+  padding: 5px 12px; border: 1px solid #ddd; border-radius: 4px;
+  transition: all 0.2s;
+}
+.project-link:hover {
+  background: var(--blue); color: #fff; border-color: var(--blue);
+}
+
+@media (max-width: 768px) {
+  .projects-grid { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
 <div id="site-nav"></div>
@@ -16,7 +96,8 @@
 
 <div class="container">
   <section class="section">
-    <div class="project-grid" id="project-grid"></div>
+    <div class="project-filters" id="project-filters"></div>
+    <div class="projects-grid" id="projects-grid"></div>
   </section>
 </div>
 
@@ -27,18 +108,79 @@
 <script>
 initPage('Projects');
 
-// 외부 파일에서 불러온 projects 배열을 사용하여 화면을 그립니다.
-document.getElementById('project-grid').innerHTML = projects.map(p => `
-  <div class="card">
-    <div class="card-img" style="display:flex;align-items:center;justify-content:center;color:var(--gray-light);font-size:14px;">Project Image</div>
-    <div class="card-body">
-      <h3 style="font-size:17px;color:#333;margin-bottom:6px;">${p.title}</h3>
-      <p style="font-size:13px;color:var(--gray-light);margin-bottom:8px;">${p.period} · ${p.funder}</p>
-      <p style="font-size:14px;color:var(--gray);margin-bottom:10px;">${p.desc}</p>
-      <a href="#" style="font-size:13px;font-weight:500;">View Details →</a>
-    </div>
-  </div>
-`).join('');
+const categoryIcons = {
+  'Medical AI': '🏥',
+  'Clinical NLP': '📝',
+  'Dermatology AI': '🔬',
+  'Precision Medicine': '🧬',
+  'Healthcare Data Science': '📊',
+  'Materials Science AI': '⚛️',
+};
+
+let activeFilter = 'All';
+
+function getCategories() {
+  const cats = [...new Set(projects.map(p => p.category))];
+  return ['All', ...cats.sort()];
+}
+
+function renderFilters() {
+  document.getElementById('project-filters').innerHTML = getCategories().map(c =>
+    `<button class="project-filter${c === activeFilter ? ' active' : ''}" onclick="setFilter('${c}')">${c}</button>`
+  ).join('');
+}
+
+function renderProjects() {
+  const filtered = activeFilter === 'All' ? projects : projects.filter(p => p.category === activeFilter);
+
+  // ongoing 먼저, 그 다음 completed
+  const sorted = [...filtered].sort((a, b) => {
+    if (a.status === b.status) return 0;
+    return a.status === 'ongoing' ? -1 : 1;
+  });
+
+  document.getElementById('projects-grid').innerHTML = sorted.map(p => {
+    const icon = categoryIcons[p.category] || '📁';
+    const linksHtml = p.links.length
+      ? `<div class="project-card-links">${p.links.map(l =>
+          `<a href="${l.url}" target="_blank" class="project-link">${l.label} →</a>`
+        ).join('')}</div>`
+      : '';
+
+    return `
+      <div class="project-card">
+        <div class="project-card-header">
+          <span class="project-card-icon">${icon}</span>
+          <span class="project-card-title">${p.title}</span>
+        </div>
+        <p class="project-card-desc">${p.desc}</p>
+        <div class="project-card-meta">
+          <div class="project-meta-row">
+            <span class="project-meta-label">Duration</span>
+            <span class="project-meta-value">${p.period}</span>
+          </div>
+          <div class="project-meta-row">
+            <span class="project-meta-label">Funding</span>
+            <span class="project-meta-value">${p.funder}</span>
+          </div>
+          <div class="project-meta-row">
+            <span class="project-meta-label">Status</span>
+            <span class="status-badge ${p.status}">${p.status === 'ongoing' ? 'Ongoing' : 'Completed'}</span>
+          </div>
+        </div>
+        ${linksHtml}
+      </div>`;
+  }).join('');
+}
+
+function setFilter(cat) {
+  activeFilter = cat;
+  renderFilters();
+  renderProjects();
+}
+
+renderFilters();
+renderProjects();
 </script>
 </body>
 </html>
