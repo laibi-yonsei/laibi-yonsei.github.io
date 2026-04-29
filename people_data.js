@@ -2,7 +2,7 @@
 
 // 박사후연구원
 const postDoctors = [
-  { name: 'Junghun Han', topic: 'Medical AI', image: 'assets/people/junghun.jpg' },
+  { name: 'Junghun Han', topic: 'Medical AI & 한글도 되나?', image: 'assets/people/junghun.jpg' },
   { name: 'Yusung Chu', topic: 'Medical AI', image: 'assets/people/yu-seong.jpg' },
 ];
 
