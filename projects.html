@@ -143,7 +143,6 @@
 
 <div class="container">
   <section class="section">
-    <div class="project-filters" id="project-filters"></div>
     <div class="projects-grid" id="projects-grid"></div>
   </section>
 </div>
@@ -171,36 +170,15 @@ const categoryIcons = {
   'Materials Science AI': '⚛️',
 };
 
-let activeFilter = 'All';
-
-function getCategories() {
-  const cats = [...new Set(projects.map(p => p.category))];
-  return ['All', ...cats.sort()];
-}
-
-function renderFilters() {
-  document.getElementById('project-filters').innerHTML = getCategories().map(c =>
-    `<button class="project-filter${c === activeFilter ? ' active' : ''}" onclick="setFilter('${c}')">${c}</button>`
-  ).join('');
-}
-
 function renderProjects() {
-  const filtered = activeFilter === 'All' ? projects : projects.filter(p => p.category === activeFilter);
-
   // ongoing 먼저, 그 다음 completed
-  const sorted = [...filtered].sort((a, b) => {
+  const sorted = [...projects].sort((a, b) => {
     if (a.status === b.status) return 0;
     return a.status === 'ongoing' ? -1 : 1;
   });
 
   document.getElementById('projects-grid').innerHTML = sorted.map(p => {
     const icon = categoryIcons[p.category] || '📁';
-    const linksHtml = p.links.length
-      ? `<div class="project-card-links">${p.links.map(l =>
-          `<a href="${l.url}" target="_blank" class="project-link">${l.label} →</a>`
-        ).join('')}</div>`
-      : '';
-
     return `
       <div class="project-card">
         <div class="project-card-header">
@@ -222,18 +200,10 @@ function renderProjects() {
             <span class="status-badge ${p.status}">${p.status === 'ongoing' ? 'Ongoing' : 'Completed'}</span>
           </div>
         </div>
-        ${linksHtml}
       </div>`;
   }).join('');
 }
 
-function setFilter(cat) {
-  activeFilter = cat;
-  renderFilters();
-  renderProjects();
-}
-
-renderFilters();
 renderProjects();
 
 // ── Collaborations ──
