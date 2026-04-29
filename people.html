@@ -5,6 +5,111 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>People – LAIBI</title>
 <link rel="stylesheet" href="styles.css" />
+<style>
+/* Bio Modal */
+#bio-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 40px 16px;
+}
+#bio-modal-box {
+  background: #fff;
+  border-radius: 10px;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 40px 40px 32px;
+  position: relative;
+}
+#bio-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: #888;
+  line-height: 1;
+}
+#bio-modal-close:hover { color: #333; }
+#bio-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e8e8e8;
+}
+#bio-modal-header img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background-color: #f0f0f0;
+}
+#bio-modal-header h2 {
+  font-size: 22px;
+  color: var(--blue);
+  margin-bottom: 4px;
+}
+#bio-modal-header p {
+  font-size: 14px;
+  color: var(--gray);
+  margin: 0;
+}
+.bio-section { margin-bottom: 28px; }
+.bio-section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--blue);
+}
+.bio-entry {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.bio-entry-period {
+  flex-shrink: 0;
+  width: 180px;
+  color: var(--gray-light);
+  font-size: 13px;
+  padding-top: 1px;
+}
+.bio-entry-desc { color: #333; }
+.bio-list { list-style: none; padding: 0; margin: 0; }
+.bio-list li {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.55;
+  padding: 4px 0;
+  padding-left: 14px;
+  position: relative;
+}
+.bio-list li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--gray-light);
+}
+/* Faculty card hover effect */
+.faculty-clickable {
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.faculty-clickable:hover { opacity: 0.8; }
+</style>
 </head>
 <body>
 <div id="site-nav"></div>
@@ -18,42 +123,44 @@
   <section class="section">
     <h2 class="section-title">Faculty</h2>
     <div style="display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;">
-      
+
       <div style="display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; min-width: 250px;">
-        <img src="assets/people/sejung.jpg" alt="Prof. Sejung Yang" style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; background-color: #f0f0f0;">
-        <div>
+        <div class="faculty-clickable" onclick="openBioModal('sejung')" style="display: flex; flex-direction: column; align-items: center;">
+          <img src="assets/people/sejung.jpg" alt="Prof. Sejung Yang" style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; background-color: #f0f0f0;">
           <h3 style="font-size: 22px; color: var(--blue); margin-bottom: 4px;">Prof. Sejung Yang, <span style="font-size: 15px; font-weight: 400;">Ph.D.</span></h3>
-          <p style="font-size: 15px; color: var(--gray); margin-bottom: 4px;">Department of Precision Medicine</p>
-          <p style="font-size: 14px; color: var(--gray-light); margin-bottom: 16px;">
-            <a href="mailto:syang@yonsei.ac.kr">syang@yonsei.ac.kr</a>
-          </p>
         </div>
+        <p style="font-size: 15px; color: var(--gray); margin-bottom: 4px;">Department of Precision Medicine</p>
+        <p style="font-size: 14px; color: var(--gray-light); margin-bottom: 12px;">
+          <a href="mailto:syang@yonsei.ac.kr">syang@yonsei.ac.kr</a>
+        </p>
+        <a href="https://scholar.google.com/citations?hl=ko&user=i8HW_9sAAAAJ" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 6px 14px; font-size: 13px; color: #fff; background-color: var(--blue); border-radius: 4px; text-decoration: none; margin-bottom: 16px;">Google Scholar</a>
       </div>
 
       <div style="display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; min-width: 250px;">
-        <img src="assets/people/yunkoo.jpg" alt="Co-Prof. Yunkoo Kang" style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; background-color: #f0f0f0;">
-        <div>
+        <div class="faculty-clickable" onclick="openBioModal('yunkoo')" style="display: flex; flex-direction: column; align-items: center;">
+          <img src="assets/people/yunkoo.jpg" alt="Co-Prof. Yunkoo Kang" style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; background-color: #f0f0f0;">
           <h3 style="font-size: 22px; color: var(--blue); margin-bottom: 4px;">Co-Prof. Yunkoo Kang, <span style="font-size: 15px; font-weight: 400;">MD & Ph.D.</span></h3>
-          <p style="font-size: 15px; color: var(--gray); margin-bottom: 4px;">Department of Pediatrics</p>
-          <p style="font-size: 14px; color: var(--gray-light); margin-bottom: 16px;">
-            <a href="mailto:monkeyduffy@yonsei.ac.kr">monkeyduffy@yonsei.ac.kr</a>
-          </p>
         </div>
+        <p style="font-size: 15px; color: var(--gray); margin-bottom: 4px;">Department of Pediatrics</p>
+        <p style="font-size: 14px; color: var(--gray-light); margin-bottom: 12px;">
+          <a href="mailto:monkeyduffy@yonsei.ac.kr">monkeyduffy@yonsei.ac.kr</a>
+        </p>
+        <a href="https://scholar.google.com/citations?hl=ko&user=bbiphLsAAAAJ" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 6px 14px; font-size: 13px; color: #fff; background-color: var(--blue); border-radius: 4px; text-decoration: none; margin-bottom: 16px;">Google Scholar</a>
       </div>
 
       <div style="display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; min-width: 250px;">
-        <img src="assets/people/jhii-hyun.jpg" alt="Co-Prof. Jhii-Hyun Ahn" style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; background-color: #f0f0f0;">
-        <div>
+        <div class="faculty-clickable" onclick="openBioModal('jhiihyun')" style="display: flex; flex-direction: column; align-items: center;">
+          <img src="assets/people/jhii-hyun.jpg" alt="Co-Prof. Jhii-Hyun Ahn" style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; background-color: #f0f0f0;">
           <h3 style="font-size: 22px; color: var(--blue); margin-bottom: 4px;">Co-Prof. Jhii-Hyun Ahn, <span style="font-size: 15px; font-weight: 400;">MD & Ph.D.</span></h3>
-          <p style="font-size: 15px; color: var(--gray); margin-bottom: 4px;">Department of Radiology</p>
-          <p style="font-size: 14px; color: var(--gray-light); margin-bottom: 16px;">
-            <a href="mailto:radajh@yonsei.ac.kr">radajh@yonsei.ac.kr</a>
-          </p>
         </div>
+        <p style="font-size: 15px; color: var(--gray); margin-bottom: 4px;">Department of Radiology</p>
+        <p style="font-size: 14px; color: var(--gray-light); margin-bottom: 16px;">
+          <a href="mailto:radajh@yonsei.ac.kr">radajh@yonsei.ac.kr</a>
+        </p>
       </div>
     </div>
   </section>
-  
+
   <section class="section">
     <h2 class="section-title">Current Members</h2>
 
@@ -68,12 +175,32 @@
   </section>
 
   <section class="section">
+    <h2 class="section-title">Collaborators</h2>
+    <div class="people-grid" id="collaborators-grid"></div>
+  </section>
+
+  <section class="section">
     <h2 class="section-title">Alumni</h2>
     <table class="data-table" id="alumni-table">
       <thead><tr><th>Name</th><th>Degree</th><th>Year</th><th>Current Position</th></tr></thead>
       <tbody></tbody>
     </table>
   </section>
+</div>
+
+<!-- Bio Modal -->
+<div id="bio-modal" onclick="handleModalClick(event)">
+  <div id="bio-modal-box">
+    <button id="bio-modal-close" onclick="closeBioModal()" aria-label="Close">&times;</button>
+    <div id="bio-modal-header">
+      <img id="bio-modal-img" src="" alt="">
+      <div>
+        <h2 id="bio-modal-name"></h2>
+        <p id="bio-modal-dept"></p>
+      </div>
+    </div>
+    <div id="bio-modal-body"></div>
+  </div>
 </div>
 
 <div id="site-footer"></div>
@@ -83,7 +210,157 @@
 <script>
 initPage('People');
 
-// 화면에 사람 카드를 그려주는 공통 함수
+// ── Faculty bio data ──────────────────────────────────────────
+const facultyBio = {
+  sejung: {
+    name: 'Prof. Sejung Yang, Ph.D.',
+    dept: 'Department of Precision Medicine',
+    image: 'assets/people/sejung.jpg',
+    education: [
+      { period: 'Sep. 2006 – Aug. 2011', desc: 'Ph.D., Information Electronics Engineering (Ewha W. University, Korea)' },
+      { period: 'Aug. 2003 – Dec. 2005', desc: 'M.S., Electrical Engineering (University of Southern California, USA)' },
+      { period: 'Mar. 2001 – Feb. 2003', desc: 'M.S., Information Electronics Engineering (Ewha W. University, Korea)' },
+      { period: 'Mar. 1997 – Feb. 2001', desc: 'B.S., Electronics Engineering (Ewha W. University, Korea)' },
+    ],
+    work: [
+      { period: 'Mar. 2023 – present',   desc: 'Assistant Professor (Yonsei University Wonju College of Medicine)' },
+      { period: 'Mar. 2018 – Dec. 2022', desc: 'Assistant Professor (Yonsei University (Mirae))' },
+      { period: 'Mar. 2016 – Feb. 2018', desc: 'Software Consultant (ZAP Surgical Systems)' },
+      { period: 'Mar. 2016 – Feb. 2018', desc: 'Visiting Scholar (Stanford University)' },
+      { period: 'Feb. 2016 – Nov. 2016', desc: 'Research Professor (Ewha W. University, Korea)' },
+      { period: 'Jan. 2014 – Dec. 2015', desc: 'Research Assistant Professor (Ewha W. University Medical Center, Korea)' },
+      { period: 'Sep. 2012 – Dec. 2013', desc: 'Research Professor (Ewha W. University, Korea)' },
+      { period: 'Sep. 2011 – Aug. 2012', desc: 'Postdoc Researcher (Ewha W. University, Korea)' },
+    ],
+    activities: [
+      'Director of Academic Affairs, The Korean Society of Medical & Biological Engineering, 2025~present',
+      'Member of Academic Committee, The Korean Society of Medical & Biology Engineering, 2020~2024',
+      'Director of General Affairs, Korean Society of Imaging Informatics in Medicine, 2025~present',
+      'Member of Board of Directors, Korea Federation of Women\'s Science & Technology Associations, 2020~present',
+      'Councillor, The Institute of Electronics and Information Engineers, 2020~2022',
+      'Topic Editor, Sensors, 2020~2022',
+    ],
+    awards: [
+      'Best Lecturer Award, Yonsei University Mirae Campus, 2020',
+    ],
+  },
+  yunkoo: {
+    name: 'Co-Prof. Yunkoo Kang, MD & Ph.D.',
+    dept: 'Department of Pediatrics',
+    image: 'assets/people/yunkoo.jpg',
+    education: [
+      { period: '', desc: 'College of Medicine, Daegu Catholic University, Daegu, Korea' },
+      { period: '', desc: 'Ph.D. in Medicine, Yonsei University, Graduate School of Medicine, Seoul, South Korea' },
+    ],
+    work: [
+      { period: 'Sep. 2024 – present', desc: 'Associate Professor, Division of Pediatric Gastroenterology, Hepatology and Nutrition, Department of Pediatrics, Wonju Severance Christian Hospital, Yonsei University Wonju College of Medicine, Wonju, Korea' },
+    ],
+    activities: [
+      'Korean Medical Association',
+      'The Korean Pediatric Society',
+      'The Korean Society of Pediatric Gastroenterology, Hepatology and Nutrition',
+    ],
+    awards: [],
+  },
+  jhiihyun: {
+    name: 'Co-Prof. Jhii-Hyun Ahn, MD & Ph.D.',
+    dept: 'Department of Radiology',
+    image: 'assets/people/jhii-hyun.jpg',
+    education: [
+      { period: 'Mar. 2011 – Aug. 2021', desc: 'Ph.D., Radiology, Yonsei University Graduate School, Seoul, Korea' },
+      { period: 'Mar. 2008 – Aug. 2010', desc: 'M.M., Radiology, Yonsei University Graduate School, Seoul, Korea' },
+      { period: 'Mar. 1999 – Feb. 2005', desc: 'M.D., Yonsei University Wonju College of Medicine, Wonju, Korea' },
+    ],
+    work: [
+      { period: 'Mar. 2022 – present',   desc: 'Associate Professor (Radiology, Yonsei University Wonju College of Medicine)' },
+      { period: 'Aug. 2022 – Feb. 2024', desc: 'Research Visiting Scholar (Radiology, University of California San Diego, USA)' },
+      { period: 'Mar. 2018 – Feb. 2022', desc: 'Assistant Professor (Radiology, Yonsei University Wonju College of Medicine)' },
+      { period: 'Mar. 2014 – Feb. 2018', desc: 'Clinical Assistant Professor (Radiology, Yonsei University Wonju College of Medicine)' },
+      { period: 'Mar. 2005 – Feb. 2012', desc: 'Internship, Residency, and Fellowship (Radiology, Yonsei University College of Medicine, Gangnam Severance Hospital)' },
+    ],
+    activities: [
+      'Member of Korean Society of Radiology',
+      'Member of Korean Society of Abdominal Radiology',
+      'Member of Korean Society of Emergency Radiology',
+      'Member of Korean Society of Ultrasound in Medicine',
+      'Member of Examination Committee of the Korean Society of Radiology',
+      'Member of Standardization Committee of the Korean Society of Radiology',
+    ],
+    awards: [
+      'Excellence Paper Award, Korean Society of Ultrasound in Medicine, 2016',
+      'Best Professor in Team Study, Yonsei University Wonju College of Medicine, 2020',
+      'Best Scientific Exhibition Award, Silver, KCR 2021',
+    ],
+  },
+};
+
+// ── Modal functions ───────────────────────────────────────────
+function openBioModal(key) {
+  const d = facultyBio[key];
+  if (!d) return;
+
+  document.getElementById('bio-modal-img').src = d.image;
+  document.getElementById('bio-modal-img').alt = d.name;
+  document.getElementById('bio-modal-name').textContent = d.name;
+  document.getElementById('bio-modal-dept').textContent = d.dept;
+
+  const renderEntries = (items) => items.map(e =>
+    `<div class="bio-entry">
+      <span class="bio-entry-period">${e.period}</span>
+      <span class="bio-entry-desc">${e.desc}</span>
+    </div>`
+  ).join('');
+
+  const renderList = (items) => items.length
+    ? `<ul class="bio-list">${items.map(i => `<li>${i}</li>`).join('')}</ul>`
+    : '';
+
+  let html = '';
+
+  if (d.education.length) {
+    html += `<div class="bio-section">
+      <div class="bio-section-title">Education</div>
+      ${renderEntries(d.education)}
+    </div>`;
+  }
+  if (d.work.length) {
+    html += `<div class="bio-section">
+      <div class="bio-section-title">Work Experiences</div>
+      ${renderEntries(d.work)}
+    </div>`;
+  }
+  if (d.activities.length) {
+    html += `<div class="bio-section">
+      <div class="bio-section-title">Activities</div>
+      ${renderList(d.activities)}
+    </div>`;
+  }
+  if (d.awards.length) {
+    html += `<div class="bio-section">
+      <div class="bio-section-title">Awards & Achievement</div>
+      ${renderList(d.awards)}
+    </div>`;
+  }
+
+  document.getElementById('bio-modal-body').innerHTML = html;
+  document.getElementById('bio-modal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBioModal() {
+  document.getElementById('bio-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function handleModalClick(e) {
+  if (e.target === document.getElementById('bio-modal')) closeBioModal();
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeBioModal();
+});
+
+// ── People cards ──────────────────────────────────────────────
 function renderPeopleCards(id, peopleArray) {
   document.getElementById(id).innerHTML = peopleArray.map(m => `
     <div class="person-card" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
@@ -95,10 +372,19 @@ function renderPeopleCards(id, peopleArray) {
   `).join('');
 }
 
-// 외부 파일에서 불러온 데이터를 화면에 렌더링
 renderPeopleCards('postdoc-grid', postDoctors);
 renderPeopleCards('phd-grid', phdStudents);
 renderPeopleCards('ms-grid', msStudents);
+
+// 협력 교수 렌더링
+document.getElementById('collaborators-grid').innerHTML = collaborators.map(m => `
+  <div class="person-card" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+    <img src="${m.image}" alt="${m.name}" onerror="this.src='assets/placeholder.jpg'" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; background-color: #f0f0f0;">
+    <h4 style="margin-bottom: 4px;">${m.name}</h4>
+    <p style="color: var(--gray); font-size: 13px; line-height: 1.4;">${m.department}</p>
+    ${m.email ? `<p style="font-size: 13px; margin-top: 4px;"><a href="mailto:${m.email}" style="color: var(--gray-light);">${m.email}</a></p>` : ''}
+  </div>
+`).join('');
 
 // 졸업생 테이블 렌더링
 document.querySelector('#alumni-table tbody').innerHTML = alumni.map(a =>
