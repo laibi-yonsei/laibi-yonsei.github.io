@@ -2,7 +2,7 @@
 
 // 국제 특허
 const intlPatents = [
-  { title: '목시플록사신을 이용한 생체조직표면 세포 영상검사장치 및 목시플록사신을 이용한 생체조직표면 세포 영상검사방법', inventors: '김기현, 이중빈, 김성한, 윤창호, 양세정', regNo: '12,320,732', year: '2025' }
+  { title: 'Apparatus and method for imaging examination of cells on surface of living tissue using moxifloxacin (목시플록사신을 이용하여 생체조직의 표면상에 세포의 영상 조사를 위한 장치와 방법)', inventors: '김기현, 이중빈, 김성한, 윤창호, 양세정', regNo: '12,320,732', year: '2025' }
 ];
 
 // 국내 특허
