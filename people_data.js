@@ -33,7 +33,6 @@ const collaborators = [
   { name: 'Prof. Sooyoung Kim', department: 'Dept. of Gastroenterology, Yonsei University Wonju College of Medicine', email: 'breeze1212@yonsei.ac.kr', image: 'assets/people/collab-sooyoung-kim.png' },
   { name: 'Prof. Sanhee Lee', department: 'Dept. of Obstetrics & Gynecology, Yonsei University Wonju College of Medicine', email: 'sanaram@yonsei.ac.kr', image: 'assets/people/collab-sanhee-lee.jpg' },
   { name: 'Prof. Byungkeun Han', department: 'Dept. of Nephrology, Yonsei University Wonju College of Medicine', email: 'neptune@yonsei.ac.kr', image: 'assets/people/collab-byungkeun-han.jpg' },
-  { name: 'Prof. Youngjun Park', department: 'Dept. of Cardiology, Yonsei University Wonju College of Medicine', email: 'pyj@yonsei.ac.kr', image: 'assets/people/collab-youngjun-park.jpg' },
   { name: 'Prof. Jinho Koh', department: 'Dept. of Convergence Medicine, Yonsei University Wonju College of Medicine', email: 'jinhokoh@yonsei.ac.kr', image: 'assets/people/collab-jinho-koh.png' },
   { name: 'Prof. Jiye Kim', department: 'Dept. of Plastic Surgery, Yonsei University Wonju College of Medicine', email: 'gen80@yonsei.ac.kr', image: 'assets/people/collab-jiye-kim.jpg' },
   { name: 'Prof. Seulgi Han', department: 'Dept. of Gastroenterology, Yonsei University Wonju College of Medicine', email: 'lolhsk@yonsei.ac.kr', image: 'assets/people/collab-seulgi-han.jpg' },
