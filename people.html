@@ -373,7 +373,7 @@ document.addEventListener('keydown', (e) => {
 function renderPeopleCards(id, peopleArray) {
   document.getElementById(id).innerHTML = peopleArray.map(m => `
     <div class="person-card" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-      <img src="${m.image}" alt="${m.name}" onerror="this.src='assets/placeholder.jpg'" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; background-color: #f0f0f0;">
+      <img src="${m.image}" alt="${m.name}" onerror="this.onerror=null;this.src='';this.alt=''" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; background-color: #e0e0e0;">
       <h4 style="margin-bottom: 4px;">${m.name}</h4>
       <p style="color: var(--gray); font-size: 14px;">${m.topic}</p>
       ${m.email ? `<p style="font-size: 13px; margin-top: 4px;"><a href="mailto:${m.email}" style="color: var(--gray-light);">${m.email}</a></p>` : ''}
@@ -388,7 +388,7 @@ renderPeopleCards('ms-grid', msStudents);
 // 협력 교수 렌더링
 document.getElementById('collaborators-grid').innerHTML = collaborators.map(m => `
   <div class="person-card" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-    <img src="${m.image}" alt="${m.name}" onerror="this.src='assets/placeholder.jpg'" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; background-color: #f0f0f0;">
+    <img src="${m.image}" alt="${m.name}" onerror="this.onerror=null;this.src='';this.alt=''" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; background-color: #e0e0e0;">
     <h4 style="margin-bottom: 4px;">${m.name}</h4>
     <p style="color: var(--gray); font-size: 13px; line-height: 1.4;">${m.department}</p>
     ${m.email ? `<p style="font-size: 13px; margin-top: 4px;"><a href="mailto:${m.email}" style="color: var(--gray-light);">${m.email}</a></p>` : ''}
