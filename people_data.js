@@ -1,8 +1,12 @@
 // people_data.js
 
+// 연구교수
+const researchProfs = [
+  { name: 'Junghun Han', topic: 'Medical AI', image: 'assets/people/junghun.jpg' },
+];
+
 // 박사후연구원
 const postDoctors = [
-  { name: 'Junghun Han', topic: 'Medical AI', image: 'assets/people/junghun.jpg' },
   { name: 'Yusung Chu', topic: 'Medical AI', image: 'assets/people/yu-seong.jpg' },
 ];
 
@@ -41,7 +45,7 @@ const collaborators = [
   { name: 'Prof. Hyunjeong Jeong', department: 'Dept. of Gastroenterology, Yonsei University Wonju College of Medicine', email: '', image: 'assets/people/collab-hyunjeong-jeong.jpg' },
   { name: 'Prof. Taesik Lee', department: 'Dept. of Family Medicine, Yonsei University Wonju College of Medicine', email: '', image: 'assets/people/collab-taesik-lee.jpg' },
   { name: 'Prof. Yongseong Cha', department: 'Dept. of Emergency Medicine, Yonsei University Wonju College of Medicine', email: '', image: 'assets/people/collab-yongseong-cha.jpg' },
-  { name: 'Prof. Kyojin Ahn', department: 'Dept. of Emergency Medicine, Yonsei University Wonju College of Medicine', email: '', image: 'assets/people/collab-kyojin-ahn.jpg' },
+  { name: 'Research Prof. Kyojin Ahn', department: 'Dept. of Emergency Medicine, Yonsei University Wonju College of Medicine', email: '', image: 'assets/people/collab-kyojin-ahn.jpg' },
   { name: 'Prof. Jaehyun Park', department: 'Dept. of Thyroid & Endocrine Surgery, Yonsei University Wonju College of Medicine', email: '', image: 'assets/people/collab-jaehyun-park.jpg' },
 ];
 
