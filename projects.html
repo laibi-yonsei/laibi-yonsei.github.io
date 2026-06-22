@@ -131,6 +131,43 @@
   .collab-grid { grid-template-columns: 1fr; }
   .collab-section { padding: 24px 16px; }
 }
+
+ #project-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.5);
+  z-index:9999;
+
+  display:none;
+
+  justify-content:center;
+  align-items:center;
+}
+
+#project-modal-box{
+  background:white;
+  width:900px;
+  max-width:90%;
+  max-height:85vh;
+
+  overflow-y:auto;
+
+  padding:40px;
+
+  border-radius:12px;
+
+  position:relative;
+}
+
+#project-modal-close{
+  position:absolute;
+  right:20px;
+  top:10px;
+
+  font-size:30px;
+
+  cursor:pointer;
+} 
 </style>
 </head>
 <body>
@@ -154,6 +191,26 @@
 </div>
 
 <div id="site-footer"></div>
+  <div id="project-modal" style="display:none;">
+  <div id="project-modal-box">
+
+    <span id="project-modal-close">&times;</span>
+
+    <h2 id="modal-title"></h2>
+
+    <hr>
+
+    <h3>Description</h3>
+    <p id="modal-desc"></p>
+
+    <h3>Funding</h3>
+    <p id="modal-funder"></p>
+
+    <h3>Period</h3>
+    <p id="modal-period"></p>
+
+  </div>
+</div>
 
 <script src="components.js"></script>
 <script src="projects_data.js"></script>
@@ -180,7 +237,9 @@ function renderProjects() {
   document.getElementById('projects-grid').innerHTML = sorted.map(p => {
     const icon = categoryIcons[p.category] || '📁';
     return `
-      <div class="project-card">
+      <div class="project-card"
+       onclick="openProjectModal('${p.title}')"
+       style="cursor:pointer;">
         <div class="project-card-header">
           <span class="project-card-icon">${icon}</span>
           <span class="project-card-title">${p.title}</span>
@@ -205,6 +264,41 @@ function renderProjects() {
 }
 
 renderProjects();
+
+  function openProjectModal(projectTitle){
+
+    const project = projects.find(
+        p => p.title === projectTitle
+    );
+
+    if(!project) return;
+
+    document.getElementById('modal-title').innerText =
+        project.title;
+
+    document.getElementById('modal-desc').innerText =
+        project.desc;
+
+    document.getElementById('modal-funder').innerText =
+        project.funder;
+
+    document.getElementById('modal-period').innerText =
+        project.period;
+
+    document.getElementById('project-modal').style.display =
+        'flex';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    document.getElementById('project-modal-close')
+      .onclick = () => {
+
+        document.getElementById('project-modal')
+          .style.display = 'none';
+    };
+
+});
 
 // ── Collaborations ──
 document.getElementById('collab-section').innerHTML = `
