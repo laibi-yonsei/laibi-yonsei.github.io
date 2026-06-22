@@ -258,11 +258,26 @@ renderProjects();
 
     if(projectTitle === "Blood Glucose Monitoring for GSD"){
 
-        document.getElementById("modal-content").innerText =
-        "테스트 중입니다1";
+    document.getElementById("modal-content").innerHTML = `
 
-    }
+        <h3>Training process for personalized DL models</h3>
 
+        <img
+            src="assets/project/당원병 학습 이미지.png"
+            alt="GSD Training Process"
+            style="
+                width:100%;
+                margin-top:15px;
+                border-radius:8px;
+            "
+        >
+
+        <p style="margin-top:15px;">
+            테스트 중입니다1
+        </p>
+
+    `;
+}
     else if(projectTitle === "Pancreatic Anomaly Detection in CT"){
 
         document.getElementById("modal-content").innerText =
