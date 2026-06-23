@@ -318,14 +318,6 @@ function renderProjects(filter) {
         <p class="project-card-desc">${p.desc}</p>
         <div class="project-card-meta">
           <div class="project-meta-row">
-            <span class="project-meta-label">Duration</span>
-            <span class="project-meta-value">${p.period}</span>
-          </div>
-          <div class="project-meta-row">
-            <span class="project-meta-label">Funding</span>
-            <span class="project-meta-value">${p.funder}</span>
-          </div>
-          <div class="project-meta-row">
             <span class="project-meta-label">Category</span>
             <span class="project-meta-value">${p.category}</span>
           </div>
@@ -371,14 +363,6 @@ function openProjectModal(idx) {
     </div>
     <div class="project-modal-section">
       <div class="project-modal-section-title">Details</div>
-      <div class="project-modal-meta-row">
-        <span class="project-modal-meta-label">Duration</span>
-        <span class="project-modal-meta-value">${p.period}</span>
-      </div>
-      <div class="project-modal-meta-row">
-        <span class="project-modal-meta-label">Funding</span>
-        <span class="project-modal-meta-value">${p.funder}</span>
-      </div>
       <div class="project-modal-meta-row">
         <span class="project-modal-meta-label">Status</span>
         <span class="status-badge ${p.status}">${p.status === 'ongoing' ? 'Ongoing' : 'Completed'}</span>
