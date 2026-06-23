@@ -69,17 +69,6 @@
 .status-badge.ongoing { background: #e3f2fd; color: #1976d2; }
 .status-badge.completed { background: #f3e5f5; color: #7b1fa2; }
 
-.project-card-links {
-  display: flex; gap: 8px; flex-wrap: wrap;
-}
-.project-link {
-  font-size: 12px; color: #666; text-decoration: none;
-  padding: 5px 12px; border: 1px solid #ddd; border-radius: 4px;
-  transition: all 0.2s;
-}
-.project-link:hover {
-  background: var(--blue); color: #fff; border-color: var(--blue);
-}
 
 /* ── Collaborations Section ── */
 .collab-section {
@@ -131,6 +120,129 @@
   .collab-grid { grid-template-columns: 1fr; }
   .collab-section { padding: 24px 16px; }
 }
+
+/* ── Project Modal ── */
+#project-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 40px 16px;
+}
+#project-modal-box {
+  background: #fff;
+  border-radius: 10px;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 40px 40px 32px;
+  position: relative;
+}
+#project-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: #888;
+  line-height: 1;
+}
+#project-modal-close:hover { color: #333; }
+#project-modal-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e8e8e8;
+}
+#project-modal-icon { font-size: 40px; flex-shrink: 0; }
+#project-modal-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--blue);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+#project-modal-category {
+  font-size: 13px;
+  color: var(--gray);
+}
+.project-modal-section { margin-bottom: 22px; }
+.project-modal-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--blue);
+}
+.project-modal-desc {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.7;
+}
+.project-modal-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+.project-modal-meta-label {
+  font-weight: 500;
+  color: #888;
+  min-width: 72px;
+}
+.project-modal-meta-value { color: #444; }
+
+.project-card { cursor: pointer; }
+
+/* ── Slide Viewer ── */
+.slide-viewer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.slide-viewer img {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  display: block;
+}
+.slide-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.slide-btn {
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+.slide-btn:hover { opacity: 0.8; }
+#slide-counter { font-size: 14px; color: #555; min-width: 50px; text-align: center; }
+
+@media (max-width: 600px) {
+  #project-modal { padding: 16px 8px; }
+  #project-modal-box { padding: 28px 18px 24px; }
+  #project-modal-header { flex-direction: column; gap: 8px; }
+}
 </style>
 </head>
 <body>
@@ -138,11 +250,12 @@
 
 <div class="page-header">
   <h1>Projects</h1>
-  <p>Ongoing and completed research projects (페이지 작업 중으로, 실제 데이터가 아님을 알려드립니다.)</p>
+  <p>Ongoing and completed research projects</p>
 </div>
 
 <div class="container">
   <section class="section">
+    <div class="project-filters" id="project-filters"></div>
     <div class="projects-grid" id="projects-grid"></div>
   </section>
 </div>
@@ -153,50 +266,21 @@
   </section>
 </div>
 
+<!-- Project Modal -->
+<div id="project-modal" onclick="handleProjectModalClick(event)">
+  <div id="project-modal-box">
+    <button id="project-modal-close" onclick="closeProjectModal()" aria-label="Close">&times;</button>
+    <div id="project-modal-header">
+      <div>
+        <div id="project-modal-title"></div>
+        <div id="project-modal-category"></div>
+      </div>
+    </div>
+    <div id="project-modal-body"></div>
+  </div>
+</div>
+
 <div id="site-footer"></div>
-
-<div id="project-modal" style="
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.5);
-justify-content:center;
-align-items:center;
-z-index:9999;
-">
-
-<div style="
-background:white;
-width:800px;
-padding:40px;
-border-radius:10px;
-position:relative;
-">
-
-<span
-onclick="document.getElementById('project-modal').style.display='none';"
-style="
-position:absolute;
-right:20px;
-top:10px;
-font-size:30px;
-cursor:pointer;
-">
-&times;
-</span>
-
-<h2 id="modal-title"></h2>
-
-<hr>
-
-<p id="modal-content"></p>
-
-</div>
-
-</div>
 
 <script src="components.js"></script>
 <script src="projects_data.js"></script>
@@ -204,30 +288,31 @@ cursor:pointer;
 <script>
 initPage('Projects');
 
-const categoryIcons = {
-  'Medical AI': '🏥',
-  'Clinical NLP': '📝',
-  'Dermatology AI': '🔬',
-  'Precision Medicine': '🧬',
-  'Healthcare Data Science': '📊',
-  'Materials Science AI': '⚛️',
-};
+let sortedProjects = [];
+let currentFilter = 'All';
 
-function renderProjects() {
-  // ongoing 먼저, 그 다음 completed
-  const sorted = [...projects].sort((a, b) => {
+function renderProjects(filter) {
+  currentFilter = filter || 'All';
+
+  sortedProjects = [...projects].sort((a, b) => {
     if (a.status === b.status) return 0;
     return a.status === 'ongoing' ? -1 : 1;
   });
 
-  document.getElementById('projects-grid').innerHTML = sorted.map(p => {
-    const icon = categoryIcons[p.category] || '📁';
+  const filtered = currentFilter === 'All'
+    ? sortedProjects
+    : sortedProjects.filter(p => p.category === currentFilter);
+
+  // 필터 버튼 active 상태 업데이트
+  document.querySelectorAll('.project-filter').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.cat === currentFilter);
+  });
+
+  document.getElementById('projects-grid').innerHTML = filtered.map((p, i) => {
+    const globalIdx = sortedProjects.indexOf(p);
     return `
-      <div class="project-card"
-       onclick="openProjectModal('${p.title}')"
-       style="cursor:pointer;">
+      <div class="project-card" onclick="openProjectModal(${globalIdx})">
         <div class="project-card-header">
-          <span class="project-card-icon">${icon}</span>
           <span class="project-card-title">${p.title}</span>
         </div>
         <p class="project-card-desc">${p.desc}</p>
@@ -241,6 +326,10 @@ function renderProjects() {
             <span class="project-meta-value">${p.funder}</span>
           </div>
           <div class="project-meta-row">
+            <span class="project-meta-label">Category</span>
+            <span class="project-meta-value">${p.category}</span>
+          </div>
+          <div class="project-meta-row">
             <span class="project-meta-label">Status</span>
             <span class="status-badge ${p.status}">${p.status === 'ongoing' ? 'Ongoing' : 'Completed'}</span>
           </div>
@@ -249,72 +338,94 @@ function renderProjects() {
   }).join('');
 }
 
-renderProjects();
-
-  function openProjectModal(projectTitle){
-
-    document.getElementById("modal-title").innerText =
-        projectTitle;
-
-    if(projectTitle === "Blood Glucose Monitoring for GSD"){
-
-    document.getElementById("modal-content").innerHTML = `
-
-        <h3>Difficulties in managing GSD and the need for clinical care</h3>
-
-        <img
-            src="assets/project/당원병 학습 이미지-1.png"
-            alt="GSD Overview"
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-                margin-bottom:30px;
-            "
-        >
-
-        <h3>Training process for personalized DL models</h3>
-
-        <img
-            src="assets/project/당원병 학습 이미지.png"
-            alt="GSD Training Process"
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-            "
-        >
-
-        <p style="margin-top:15px;">
-            테스트 중입니다1
-        </p>
-
-    `;
+// 카테고리 필터 버튼 생성
+function renderFilters() {
+  const cats = ['All', ...([...new Set(projects.map(p => p.category))])];
+  document.getElementById('project-filters').innerHTML = cats.map(cat => `
+    <button class="project-filter${cat === 'All' ? ' active' : ''}" data-cat="${cat}" onclick="renderProjects('${cat}')">
+      ${cat}
+    </button>
+  `).join('');
 }
-    else if(projectTitle === "Pancreatic Anomaly Detection in CT"){
 
-        document.getElementById("modal-content").innerText =
-        "테스트 중입니다2";
+renderFilters();
+renderProjects('All');
 
-    }
+// ── 슬라이드 뷰어 상태 ──
+let modalSlides = [];
+let modalSlideIdx = 0;
 
-    else if(projectTitle === "Wound Image Analysis & Tissue Segmentation"){
+function openProjectModal(idx) {
+  const p = sortedProjects[idx];
+  if (!p) return;
+  document.getElementById('project-modal-title').textContent = p.title;
+  document.getElementById('project-modal-category').textContent = p.category;
 
-        document.getElementById("modal-content").innerText =
-        "테스트 중입니다3";
+  modalSlides = p.slides || [];
+  modalSlideIdx = 0;
 
-    }
+  let html = `
+    <div class="project-modal-section">
+      <div class="project-modal-section-title">Overview</div>
+      <p class="project-modal-desc">${p.desc}</p>
+    </div>
+    <div class="project-modal-section">
+      <div class="project-modal-section-title">Details</div>
+      <div class="project-modal-meta-row">
+        <span class="project-modal-meta-label">Duration</span>
+        <span class="project-modal-meta-value">${p.period}</span>
+      </div>
+      <div class="project-modal-meta-row">
+        <span class="project-modal-meta-label">Funding</span>
+        <span class="project-modal-meta-value">${p.funder}</span>
+      </div>
+      <div class="project-modal-meta-row">
+        <span class="project-modal-meta-label">Status</span>
+        <span class="status-badge ${p.status}">${p.status === 'ongoing' ? 'Ongoing' : 'Completed'}</span>
+      </div>
+    </div>`;
 
-    else{
+  if (modalSlides.length) {
+    html += `
+    <div class="project-modal-section">
+      <div class="project-modal-section-title">Slides</div>
+      <div class="slide-viewer">
+        <img id="slide-img" src="${modalSlides[0]}" alt="Slide 1" />
+        <div class="slide-controls">
+          <button class="slide-btn" onclick="changeSlide(-1)">&#8592;</button>
+          <span id="slide-counter">1 / ${modalSlides.length}</span>
+          <button class="slide-btn" onclick="changeSlide(1)">&#8594;</button>
+        </div>
+      </div>
+    </div>`;
+  }
 
-        document.getElementById("modal-content").innerText =
-        "아직 내용 없음";
-
-    }
-
-    document.getElementById("project-modal").style.display =
-        "flex";
+  document.getElementById('project-modal-body').innerHTML = html;
+  document.getElementById('project-modal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
 }
+
+function changeSlide(dir) {
+  if (!modalSlides.length) return;
+  modalSlideIdx = (modalSlideIdx + dir + modalSlides.length) % modalSlides.length;
+  document.getElementById('slide-img').src = modalSlides[modalSlideIdx];
+  document.getElementById('slide-counter').textContent = `${modalSlideIdx + 1} / ${modalSlides.length}`;
+}
+
+function closeProjectModal() {
+  document.getElementById('project-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function handleProjectModalClick(e) {
+  if (e.target === document.getElementById('project-modal')) closeProjectModal();
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeProjectModal();
+  if (e.key === 'ArrowLeft') changeSlide(-1);
+  if (e.key === 'ArrowRight') changeSlide(1);
+});
 
 // ── Collaborations ──
 document.getElementById('collab-section').innerHTML = `
