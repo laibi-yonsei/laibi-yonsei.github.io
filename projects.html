@@ -5,19 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Projects – LAIBI</title>
 <link rel="stylesheet" href="styles.css" />
-<style>
-/* ── Project Page Styles (CVML-inspired) ── */
-.project-filters {
-  display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap;
-}
-.project-filter {
-  padding: 6px 18px; border-radius: 20px; font-size: 13px; font-weight: 500;
-  border: 1px solid var(--gray-border); color: var(--gray); background: transparent;
-  cursor: pointer; transition: all 0.2s;
-}
-.project-filter:hover { border-color: var(--blue); color: var(--blue); }
-.project-filter.active { background: var(--blue); color: #fff; border-color: var(--blue); }
 
+<style>
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -29,116 +18,148 @@
   border: 1px solid #eee;
   border-radius: 9px;
   padding: 24px;
+  cursor: pointer;
   transition: box-shadow 0.3s ease, transform 0.2s ease;
-  display: flex; flex-direction: column;
 }
+
 .project-card:hover {
   box-shadow: 0 6px 24px rgba(0,0,0,0.1);
   transform: translateY(-2px);
 }
 
 .project-card-header {
-  display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
 }
+
 .project-card-icon {
-  font-size: 28px; flex-shrink: 0; margin-top: 2px;
+  font-size: 28px;
 }
+
 .project-card-title {
-  font-size: 17px; font-weight: 600; color: #333; line-height: 1.4;
+  font-size: 17px;
+  font-weight: 600;
+  color: #333;
 }
 
 .project-card-desc {
-  font-size: 14px; color: var(--gray); line-height: 1.6; margin-bottom: 18px; flex: 1;
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.6;
 }
 
-.project-card-meta {
-  margin-bottom: 16px; font-size: 13px;
-}
 .project-meta-row {
-  display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 13px;
 }
+
 .project-meta-label {
-  font-weight: 500; color: #888; min-width: 64px;
+  font-weight: 500;
+  color: #888;
+  min-width: 64px;
 }
-.project-meta-value { color: #555; }
 
 .status-badge {
-  display: inline-block; padding: 2px 10px; border-radius: 12px;
-  font-size: 12px; font-weight: 500;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 12px;
 }
-.status-badge.ongoing { background: #e3f2fd; color: #1976d2; }
-.status-badge.completed { background: #f3e5f5; color: #7b1fa2; }
 
-.project-card-links {
-  display: flex; gap: 8px; flex-wrap: wrap;
+.status-badge.ongoing {
+  background: #e3f2fd;
+  color: #1976d2;
 }
+
+.status-badge.completed {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
 .project-link {
-  font-size: 12px; color: #666; text-decoration: none;
-  padding: 5px 12px; border: 1px solid #ddd; border-radius: 4px;
-  transition: all 0.2s;
-}
-.project-link:hover {
-  background: var(--blue); color: #fff; border-color: var(--blue);
+  display: inline-block;
+  margin-top: 10px;
+  margin-right: 6px;
+  font-size: 12px;
+  color: #666;
+  text-decoration: none;
+  padding: 5px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
-/* ── Collaborations Section ── */
-.collab-section {
-  background: #f9f9f9;
+.project-link:hover {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+
+/* Modal */
+.project-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.project-modal-box {
+  background: white;
+  width: 800px;
+  max-width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
   padding: 40px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.modal-section-title {
+  border-left: 6px solid #2b6cb0;
+  padding-left: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #ddd;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.modal-image {
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 30px;
   border-radius: 8px;
-  margin-top: 16px;
-}
-.collab-section-title {
-  font-family: var(--font-serif);
-  font-size: 24px; font-weight: 600; color: #333;
-  margin-bottom: 24px; text-align: center;
-}
-.collab-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-}
-.collab-item {
-  background: #fff;
-  padding: 20px;
-  border-radius: 6px;
-  border-left: 3px solid var(--blue);
-  transition: box-shadow 0.2s ease;
-  display: flex; flex-direction: column; align-items: center; text-align: center;
-}
-.collab-item:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-.collab-logo {
-  height: 40px; max-width: 160px; object-fit: contain; margin-bottom: 12px;
-}
-.collab-item h4 {
-  font-size: 16px; font-weight: 600; color: #333; margin-bottom: 6px;
-}
-.collab-item .collab-type {
-  display: inline-block; font-size: 11px; font-weight: 500;
-  padding: 2px 8px; border-radius: 10px; margin-bottom: 8px;
-}
-.collab-type.academic { background: #e3f2fd; color: #1976d2; }
-.collab-type.medical  { background: #e8f5e9; color: #388e3c; }
-.collab-type.industry  { background: #fff3e0; color: #e65100; }
-.collab-item p {
-  font-size: 13px; color: #666; line-height: 1.5;
 }
 
 @media (max-width: 768px) {
-  .projects-grid { grid-template-columns: 1fr; }
-  .collab-grid { grid-template-columns: 1fr; }
-  .collab-section { padding: 24px 16px; }
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-modal-box {
+    padding: 28px 20px;
+  }
 }
 </style>
 </head>
+
 <body>
 <div id="site-nav"></div>
 
 <div class="page-header">
   <h1>Projects</h1>
-  <p>Ongoing and completed research projects (페이지 작업 중으로, 실제 데이터가 아님을 알려드립니다.)</p>
+  <p>Ongoing and completed research projects.</p>
 </div>
 
 <div class="container">
@@ -147,61 +168,20 @@
   </section>
 </div>
 
-<div class="container">
-  <section class="section" style="border-top: none;">
-    <div class="collab-section" id="collab-section"></div>
-  </section>
-</div>
-
 <div id="site-footer"></div>
 
-<div id="project-modal" style="
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.5);
-justify-content:center;
-align-items:center;
-z-index:9999;
-">
-
-<div style="
-background:white;
-width:800px;
-max-height:90vh;
-overflow-y:auto;
-padding:40px;
-border-radius:10px;
-position:relative;
-">
-<span
-onclick="document.getElementById('project-modal').style.display='none';"
-style="
-position:absolute;
-right:20px;
-top:10px;
-font-size:30px;
-cursor:pointer;
-">
-&times;
-</span>
-
-<h2 id="modal-title"></h2>
-
-<hr>
-
-<p id="modal-content"></p>
-
-</div>
-
+<div class="project-modal" id="project-modal">
+  <div class="project-modal-box">
+    <span class="modal-close" onclick="closeProjectModal()">&times;</span>
+    <h2 id="modal-title"></h2>
+    <hr>
+    <div id="modal-content"></div>
+  </div>
 </div>
 
 <script src="components.js"></script>
 <script src="projects_data.js"></script>
-<script src="industry_collaborations_data.js"></script>
+
 <script>
 initPage('Projects');
 
@@ -211,704 +191,93 @@ const categoryIcons = {
   'Dermatology AI': '🔬',
   'Precision Medicine': '🧬',
   'Healthcare Data Science': '📊',
-  'Materials Science AI': '⚛️',
+  'Materials Science AI': '⚛️'
 };
 
 function renderProjects() {
-  // ongoing 먼저, 그 다음 completed
-  const sorted = [...projects].sort((a, b) => {
+  const sortedProjects = [...projects].sort((a, b) => {
     if (a.status === b.status) return 0;
     return a.status === 'ongoing' ? -1 : 1;
   });
 
-  document.getElementById('projects-grid').innerHTML = sorted.map(p => {
+  document.getElementById('projects-grid').innerHTML = sortedProjects.map((p, index) => {
     const icon = categoryIcons[p.category] || '📁';
+
     return `
-      <div class="project-card"
-       onclick="openProjectModal('${p.title}')"
-       style="cursor:pointer;">
+      <div class="project-card" onclick="openProjectModal(${index})">
         <div class="project-card-header">
           <span class="project-card-icon">${icon}</span>
           <span class="project-card-title">${p.title}</span>
         </div>
+
         <p class="project-card-desc">${p.desc}</p>
+
         <div class="project-card-meta">
           <div class="project-meta-row">
             <span class="project-meta-label">Duration</span>
-            <span class="project-meta-value">${p.period}</span>
+            <span>${p.period}</span>
           </div>
+
           <div class="project-meta-row">
             <span class="project-meta-label">Funding</span>
-            <span class="project-meta-value">${p.funder}</span>
+            <span>${p.funder}</span>
           </div>
+
           <div class="project-meta-row">
             <span class="project-meta-label">Status</span>
-            <span class="status-badge ${p.status}">${p.status === 'ongoing' ? 'Ongoing' : 'Completed'}</span>
+            <span class="status-badge ${p.status}">
+              ${p.status === 'ongoing' ? 'Ongoing' : 'Completed'}
+            </span>
           </div>
         </div>
-      </div>`;
+
+        <div>
+          ${p.links.map(link => `
+            <a class="project-link" href="${link.url}" target="_blank" onclick="event.stopPropagation()">
+              ${link.label}
+            </a>
+          `).join('')}
+        </div>
+      </div>
+    `;
   }).join('');
 }
 
+function openProjectModal(index) {
+  const sortedProjects = [...projects].sort((a, b) => {
+    if (a.status === b.status) return 0;
+    return a.status === 'ongoing' ? -1 : 1;
+  });
+
+  const project = sortedProjects[index];
+
+  document.getElementById('modal-title').innerText = project.title;
+
+  if (!project.modal || project.modal.length === 0) {
+    document.getElementById('modal-content').innerHTML = `
+      <p style="margin-top:20px;">아직 내용 없음</p>
+    `;
+  } else {
+    document.getElementById('modal-content').innerHTML = project.modal.map(item => `
+      <h3 class="modal-section-title">${item.heading}</h3>
+      <img src="${item.image}" alt="" class="modal-image">
+    `).join('');
+  }
+
+  document.getElementById('project-modal').style.display = 'flex';
+}
+
+function closeProjectModal() {
+  document.getElementById('project-modal').style.display = 'none';
+}
+
+document.getElementById('project-modal').addEventListener('click', function(e) {
+  if (e.target.id === 'project-modal') {
+    closeProjectModal();
+  }
+});
+
 renderProjects();
-
-  function openProjectModal(projectTitle){
-
-    document.getElementById("modal-title").innerText =
-        projectTitle;
-
-
-  if(projectTitle === "AI-Assisted Medical Diagnosis Platform"){
-
-        document.getElementById("modal-content").innerText =
-        "아직 내용 없음";
-
-    }
-
-  else if(projectTitle === "Clinical NLP for Korean EHR Systems"){
-
-        document.getElementById("modal-content").innerText =
-        "아직 내용 없음";
-
-    }
-
-  else if(projectTitle === "Deep Learning for Chromosome Analysis"){
-
-        document.getElementById("modal-content").innerText =
-        "아직 내용 없음";
-
-    }
-      
-       
-
-   else if(projectTitle === "Nystagmus Detection & Analysis System"){
-
-    document.getElementById("modal-content").innerHTML = `
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">
-    Research Background
-</h3>
-
-        <img
-            src="assets/project/Nystagmus(안진) 설명.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-                margin-bottom:30px;
-            "
-        >
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">Method Overview</h3>
-        
-        <img
-            src="assets/project/Nystagmus(안진) 모델.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-                margin-bottom:30px;
-            "
-        >
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">Results</h3>
-
-        <img
-            src="assets/project/Nystagmus(안진) 결과.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-            "
-        >
-
-        <!--
-<p style="margin-top:15px;">
-    테스트 중입니다1
-</p>
--->
-
-    `;
-}
-
-else if(projectTitle === "Post-Thyroidectomy Scar Assessment"){
-
-        document.getElementById("modal-content").innerHTML = `
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">
-    Research Background
-  </h3>
-
-        <img
-            src="assets/project/갑성선 세포 분류 설명.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-                margin-bottom:30px;
-            "
-        >
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">Method Overview</h3>
-
-        <img
-            src="assets/project/갑성선 세포 분류 방법.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-            "
-        >
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">Future work</h3>
-
-        <img
-            src="assets/project/갑성선 세포 분류 결과.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-            "
-        >
-
-        <!--
-<p style="margin-top:15px;">
-    테스트 중입니다1
-</p>
--->
-
-    `;
-
-    }
-      
-
-     
-else if(projectTitle === "Wound Image Analysis & Tissue Segmentation"){
-
-        document.getElementById("modal-content").innerHTML = `
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">
-    Research Background 
-  </h3>
-
-        <img
-            src="assets/project/wound 설명.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-                margin-bottom:30px;
-            "
-        >
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">Method Overview</h3>
-
-        <img
-            src="assets/project/wound 모델.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-            "
-        >
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">Results</h3>
-
-        <img
-            src="assets/project/wound 결과.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-            "
-        >
-
-        <!--
-<p style="margin-top:15px;">
-    테스트 중입니다1
-</p>
--->
-
-    `;
-
-    }
-
-
- else if(projectTitle === "Pancreatic Anomaly Detection in CT"){
-
-    document.getElementById("modal-content").innerHTML = `
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">
-    Research Background 
-  </h3>
-
-        <img
-            src="assets/project/pancreatic ct 설명.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-                margin-bottom:30px;
-            "
-        >
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">Method Overview</h3>
-
-        <img
-            src="assets/project/pancreatic ct 모델.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-            "
-        >
-
-        <!--
-<p style="margin-top:15px;">
-    테스트 중입니다1
-</p>
--->
-    `;
-}
-
-
-      
-    
-    else if(projectTitle === "Blood Glucose Monitoring for GSD"){
-
-    document.getElementById("modal-content").innerHTML = `
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">
-    Research Background 
-  </h3>
-
-        <img
-            src="assets/project/당원병 설명.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-                margin-bottom:30px;
-            "
-        >
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">Method Overview</h3>
-
-        <img
-            src="assets/project/당원병 모델.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-            "
-        >
-
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">Results</h3>
-
-        <img
-            src="assets/project/당원병 결과.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-            "
-        >
-
-        <!--
-<p style="margin-top:15px;">
-    테스트 중입니다1
-</p>
--->
-
-    `;
-}
-
-
-   else if(projectTitle === "Facial Vitiligo Area Measurement"){
-
-        document.getElementById("modal-content").innerHTML = `
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">
-    Research Background 
-  </h3>
-
-        <img
-            src="assets/project/백반증 설명.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-                margin-bottom:30px;
-            "
-        >
-
-       <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">Method Overview</h3>
-
-        <img
-            src="assets/project/백반증 모델.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-            "
-        >
-
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">Results</h3>
-
-        <img
-            src="assets/project/백반증 결과.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-            "
-        >
-
-        <!--
-<p style="margin-top:15px;">
-    테스트 중입니다1
-</p>
--->
-
-    `;
-
-    }
-
-
-  else if(projectTitle === "Federated Learning for Hospital Networks"){
-
-        document.getElementById("modal-content").innerText =
-        "아직 내용 없음";
-
-    }
-       
-
-
-   else if(projectTitle === "Endoscopic Surgical Image Enhancement"){
-
-        document.getElementById("modal-content").innerHTML = `
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">
-    Research Background 
-  </h3>
-
-        <img
-            src="assets/project/내시경 영상 이미지 영상처리 설명.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-                margin-bottom:30px;
-            "
-        >
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">Method Overview</h3>
-
-        <img
-            src="assets/project/내시경 영상 이미지 영상처리 모델.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-            "
-        >
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">Results</h3>
-
-        <img
-            src="assets/project/내시경 영상 이미지 영상처리 결과.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-            "
-        >
-
-        <!--
-<p style="margin-top:15px;">
-    테스트 중입니다1
-</p>
--->
-
-    `;
-
-    }
-      
-    
-   else if(projectTitle === "Acral Melanoma AI Diagnosis"){
-
-        document.getElementById("modal-content").innerText =
-        "아직 내용 없음";
-
-    }
-
-   else if(projectTitle === "ECG-based Cardiac Disease Prediction"){
-
-        document.getElementById("modal-content").innerText =
-        "아직 내용 없음";
-
-    }
-
-
-   else if(projectTitle === "Alopecia Areata Severity Assessment"){
-
-        document.getElementById("modal-content").innerHTML = `
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">
-    Research Background 
-  </h3>
-
-        <img
-            src="assets/project/탈모 설명.png"
-            alt="GSD Overview"
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-                margin-bottom:30px;
-            "
-        >
-
-        <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">Method Overview</h3>
-
-        <img
-            src="assets/project/탈모 모델.png"
-            alt="GSD Training Process"
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-            "
-        >
-
-
-      <h3 style="
-    border-left:6px solid #2b6cb0;
-    padding-left:12px;
-    padding-bottom:6px;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-">Results</h3>
-
-        <img
-            src="assets/project/탈모 결과.png"
-            alt=""
-            style="
-                width:100%;
-                margin-top:15px;
-                border-radius:8px;
-            "
-        >
-
-
-        
-
-        <!--
-<p style="margin-top:15px;">
-    테스트 중입니다1
-</p>
--->
-
-    `;
-
-    }
-      
-
-
-    else if(projectTitle === "Multi-modal Biomarker Discovery"){
-
-        document.getElementById("modal-content").innerText =
-        "아직 내용 없음";
-
-    }
-
-    else if(projectTitle === "Point Defect Detection in 2D Materials"){
-
-        document.getElementById("modal-content").innerText =
-        "아직 내용 없음";
-
-    }
- 
-
-    else{
-
-        document.getElementById("modal-content").innerText =
-        "아직 내용 없음";
-
-    }
-
-    document.getElementById("project-modal").style.display =
-        "flex";
-}
-
-// ── Collaborations ──
-document.getElementById('collab-section').innerHTML = `
-  <h2 class="collab-section-title">Collaborations</h2>
-  <div class="collab-grid">
-    ${collaborations.map(c => `
-      <div class="collab-item">
-        ${c.logo ? `<img src="${c.logo}" alt="${c.name}" class="collab-logo" />` : ''}
-        <h4>${c.name}</h4>
-        <span class="collab-type ${c.type.toLowerCase()}">${c.type}</span>
-        <p>${c.desc}</p>
-      </div>
-    `).join('')}
-  </div>
-`;
 </script>
 </body>
 </html>
