@@ -34,7 +34,7 @@ const projects = [
   // ── 영상의학과 Radiology ────────────────────────────────────
   {
     title: 'Multi-modal CT + Clinical Data for Hepatic Portal Hypertension',
-    category: 'Radiology',
+    category: 'Radiology', 'Internal Medicine'
     status: 'ongoing',
     desc: 'Multi-modal deep learning model combining 3D abdominal CT (Swin-Transformer) and clinical text (BLIP) for non-invasive prediction of clinically significant portal hypertension (HVPG ≥ 10 mmHg). Validated at SoonChunHyang University Bucheon Hospital. Paper in progress.',
     slides: ['assets/projects/Radiology/slide_18.jpg', 'assets/projects/Radiology/slide_19.jpg', 'assets/projects/Radiology/slide_20.jpg', 'assets/projects/Radiology/slide_21.jpg', 'assets/projects/Radiology/slide_22.jpg'],
@@ -74,21 +74,21 @@ const projects = [
   {
     title: 'Robust Melanoma Prediction via Consistent Deep Learning',
     category: 'Dermatology',
-    status: 'ongoing',
+    status: 'completed',
     desc: 'Deep learning method for consistent and robust melanoma prediction across slight image variations of the same lesion. Accepted for publication in IEEE Journal of Biomedical and Health Informatics (JBHI; IF: 6.7, JCR Top 5.7%).',
     slides: ['assets/projects/Dermatology/slide_41.jpg', 'assets/projects/Dermatology/slide_42.jpg'],
   },
   {
     title: 'AI-Based 3D Facial Vitiligo Area Measurement',
     category: 'Dermatology',
-    status: 'ongoing',
+    status: 'completed',
     desc: '3D face reconstruction and UV mapping framework for automated quantification of facial vitiligo area. Parts published in Biomedical Engineering 2025; preparing for submission to JAMA Dermatology.',
     slides: ['assets/projects/Dermatology/slide_43.jpg', 'assets/projects/Dermatology/slide_44.jpg', 'assets/projects/Dermatology/slide_45.jpg', 'assets/projects/Dermatology/slide_46.jpg'],
   },
   {
     title: 'AI-Based 3D Alopecia Areata (SALT Score) Assessment',
     category: 'Dermatology',
-    status: 'ongoing',
+    status: 'completed',
     desc: '3D head reconstruction and UV texture mapping for automated SALT score measurement in alopecia areata. CNN-based segmentation of hair loss area on reconstructed 3D mesh. Preparing for submission to JAMA Dermatology.',
     slides: ['assets/projects/Dermatology/slide_47.jpg', 'assets/projects/Dermatology/slide_48.jpg', 'assets/projects/Dermatology/slide_49.jpg'],
   },
@@ -96,8 +96,8 @@ const projects = [
   // ── 성형외과 Plastic Surgery ────────────────────────────────
   {
     title: 'Multi-Task Learning for Wound Detection and Tissue Segmentation',
-    category: 'Plastic Surgery',
-    status: 'ongoing',
+    category: 'Plastic Surgery', 'Dermatology'
+    status: 'completed',
     desc: 'WISE-MTL framework with GradNorm for simultaneous wound boundary detection and tissue type segmentation (granulation, slough, necrosis, epithelial). Outperforms single-task learning across all tissue types. Submitted to PLOS One (IF: 2.9).',
     slides: ['assets/projects/Plastic Surgery/slide_51.jpg', 'assets/projects/Plastic Surgery/slide_52.jpg', 'assets/projects/Plastic Surgery/slide_53.jpg'],
   },
@@ -106,7 +106,7 @@ const projects = [
   {
     title: 'Frozen Section to FFPE Style Translation for Skin Pathology',
     category: 'Pathology',
-    status: 'ongoing',
+    status: 'completed',
     desc: 'Generative AI model (CUT-based) for translating frozen section (FS) histology slides to formalin-fixed paraffin-embedded (FFPE) style, targeting skin cancers (melanoma, EMPD, Bowen\'s disease). Enables intraoperative diagnosis quality comparable to the gold standard.',
     slides: ['assets/projects/Pathology/slide_60.jpg', 'assets/projects/Pathology/slide_61.jpg'],
   },
@@ -133,7 +133,7 @@ const projects = [
   {
     title: 'AI-Based Mitochondrial TEM Image Analysis for Sarcopenia',
     category: 'Convergence Medicine',
-    status: 'ongoing',
+    status: 'completed',
     desc: 'Automated analysis of mitochondrial ultrastructure in transmission electron microscopy (TEM) images using MICRO-SAM segmentation and ResNet-50 feature extraction for t-SNE clustering. Targets sarcopenia-related mitochondrial dysfunction assessment.',
     slides: ['assets/projects/Convergence Medicine/slide_72.jpg'],
   },
