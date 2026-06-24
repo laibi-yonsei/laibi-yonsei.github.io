@@ -34,7 +34,7 @@ const projects = [
   // ── 영상의학과 Radiology ────────────────────────────────────
   {
     title: 'Multi-modal CT + Clinical Data for Hepatic Portal Hypertension',
-    category: 'Radiology', 'Internal Medicine',
+    category: ['Radiology', 'Internal Medicine'],
     status: 'ongoing',
     desc: 'Multi-modal deep learning model combining 3D abdominal CT (Swin-Transformer) and clinical text (BLIP) for non-invasive prediction of clinically significant portal hypertension (HVPG ≥ 10 mmHg). Validated at SoonChunHyang University Bucheon Hospital. Paper in progress.',
     slides: ['assets/projects/Radiology/slide_18.jpg', 'assets/projects/Radiology/slide_19.jpg', 'assets/projects/Radiology/slide_20.jpg', 'assets/projects/Radiology/slide_21.jpg', 'assets/projects/Radiology/slide_22.jpg'],
@@ -96,7 +96,7 @@ const projects = [
   // ── 성형외과 Plastic Surgery ────────────────────────────────
   {
     title: 'Multi-Task Learning for Wound Detection and Tissue Segmentation',
-    category: 'Plastic Surgery', 'Dermatology',
+    category: ['Plastic Surgery', 'Dermatology'],
     status: 'completed',
     desc: 'WISE-MTL framework with GradNorm for simultaneous wound boundary detection and tissue type segmentation (granulation, slough, necrosis, epithelial). Outperforms single-task learning across all tissue types. Submitted to PLOS One (IF: 2.9).',
     slides: ['assets/projects/Plastic Surgery/slide_51.jpg', 'assets/projects/Plastic Surgery/slide_52.jpg', 'assets/projects/Plastic Surgery/slide_53.jpg'],
