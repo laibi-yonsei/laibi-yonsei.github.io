@@ -301,7 +301,7 @@ function renderProjects(filter) {
 
   const filtered = currentFilter === 'All'
     ? sortedProjects
-    : sortedProjects.filter(p => p.category === currentFilter);
+    : sortedProjects.filter(p => catList(p.category).includes(currentFilter));
 
   // 필터 버튼 active 상태 업데이트
   document.querySelectorAll('.project-filter').forEach(btn => {
@@ -319,7 +319,7 @@ function renderProjects(filter) {
         <div class="project-card-meta">
           <div class="project-meta-row">
             <span class="project-meta-label">Category</span>
-            <span class="project-meta-value">${p.category}</span>
+            <span class="project-meta-value">${catList(p.category).join(', ')}</span>
           </div>
           <div class="project-meta-row">
             <span class="project-meta-label">Status</span>
@@ -330,9 +330,14 @@ function renderProjects(filter) {
   }).join('');
 }
 
+// 카테고리를 항상 배열로 정규화 (문자열 1개 또는 배열 모두 지원)
+function catList(c) {
+  return Array.isArray(c) ? c : [c];
+}
+
 // 카테고리 필터 버튼 생성
 function renderFilters() {
-  const cats = ['All', ...([...new Set(projects.map(p => p.category))])];
+  const cats = ['All', ...([...new Set(projects.flatMap(p => catList(p.category)))])];
   document.getElementById('project-filters').innerHTML = cats.map(cat => `
     <button class="project-filter${cat === 'All' ? ' active' : ''}" data-cat="${cat}" onclick="renderProjects('${cat}')">
       ${cat}
@@ -351,7 +356,7 @@ function openProjectModal(idx) {
   const p = sortedProjects[idx];
   if (!p) return;
   document.getElementById('project-modal-title').textContent = p.title;
-  document.getElementById('project-modal-category').textContent = p.category;
+  document.getElementById('project-modal-category').textContent = catList(p.category).join(', ');
 
   modalSlides = p.slides || [];
   modalSlideIdx = 0;
