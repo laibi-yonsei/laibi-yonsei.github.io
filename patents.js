@@ -2,11 +2,15 @@
 
 // 국제 특허
 const intlPatents = [
+  { title: 'DATA AUGMENTATION TECHNIQUE OPTIMIZED FOR STABLE AND UNSTABLE EXTRACHROMOSOMAL MULTI-OBJECT IMAGES (안정형 및 불안정형 염색체 외 멀티 오브젝트 이미지에 최적화된 데이터 증강 기법)', inventors: '이인경, 양세정, 한중훈', regNo: 'PCT/KR2025/011030', year: '2025' },
   { title: 'Apparatus and method for imaging examination of cells on surface of living tissue using moxifloxacin (목시플록사신을 이용하여 생체조직의 표면상에 세포의 영상 조사를 위한 장치와 방법)', inventors: '김기현, 이중빈, 김성한, 윤창호, 양세정', regNo: '12,320,732', year: '2025' }
 ];
 
 // 국내 특허
 const domesticPatents = [
+  { title: '영상 증강을 이용한 안정형 염색체의 계수 방법 및 이를 위한 계수 장치', inventors: '이인경, 양세정, 한중훈, 강승영', appNo: '10-2022-0161395', regNo: '10-2982752', year: '2026' },
+  { title: '영상 증강을 이용한 염색체의 계수 방법 및 이를 위한 계수 장치', inventors: '이인경, 양세정, 한중훈, 강승영', appNo: '10-2022-0161394', regNo: '10-2982745', year: '2026' },
+  { title: '생성적 대립 신경망(GAN, Generative Adversarial Network)을 활용한 주사투과전자현미경 영상에서의 노이즈 제거 방법', inventors: '양세정, 한중훈, 추유성, 최시영, 고경준, 양동환', appNo: '10-2023-0019322', regNo: '10-2826899', year: '2025' },
   { title: '저차원 재료의 원자 이미지 분석 방법', inventors: '양세정, 한중훈, 추유성, 최시영, Okello NgomeODONGO FRANCIS, 양동환, 고경준, 김기엽', appNo: '1020190158224', regNo: '102253227', year: '2021' },
   { title: '주사투과전자현미경 이미지에서의 원자 구조 해석 방법', inventors: '양세정, 고경준, 양동환, 최시영, 한중훈, 이지영, 안홍기', appNo: '1020190154820', regNo: '102338050', year: '2021' },
   { title: '관상동맥 조영 영상을 이용한 심장 협착증 진단 알고리즘', inventors: '양세정, 윤영진, 이지영, 안홍기, 박무열, 이채원', appNo: '1020200033550', regNo: '102361354', year: '2022' },
