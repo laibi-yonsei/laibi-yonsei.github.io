@@ -1,5 +1,7 @@
 // news_data.js — 실제 논문·수상·연구실 소식
 const newsData = [
+  { date: '2025.11', text: '대한의용생체공학회 2025 추계학술대회 <strong>우수논문 대상</strong> 수상 — 김근혜'  },
+  { date: '2025.09', text: '대한디지털헬스학회  2025 추계학술대회 <strong>포스터 장려상</strong> 수상 — 김근혜' },
   { date: '2025.06', text: 'Paper published in <strong>Frontiers in Pain Research</strong> (IF=2.7) — "Classifying office workers with cervicogenic headache using posture-based deep learning models"' },
   { date: '2025.06', text: 'Paper published in <strong>Biomedical Engineering Letters</strong> (IF=2.8) — "Vision-language foundation models for medical imaging: a review"' },
   { date: '2025.05', text: '대한의용생체공학회 2025 춘계학술대회 <strong>우수논문 대상</strong> 수상 — 박영현' },
