@@ -1,6 +1,8 @@
 const awards = [
   { title: '제 40회 대한의학영상정보학회 학술대회 우수상', recipient: '박영현', organization: '대한의학영상정보학회', year: '2026' },
+  { title: 'Yonsei Medical Journal 2022–2023 최우수 논문상', recipient: '양세정', organization: 'Yonsei Medical Journal', year: '2025' },
   { title: '대한의용생체공학회 2025년 춘계학술대회 우수논문 대상', recipient: '박영현', organization: '대한의용생체공학회', year: '2025' },
+  { title: '연세대학교 대학원 단과대 최우수논문상', recipient: '추유성', organization: '연세대학교 일반대학원', year: '2024' },
   { title: '대한디지털헬스학회 우수상', recipient: '강현영', organization: '대한디지털헬스학회', year: '2024' },
   { title: '대한디지털헬스학회 최우수상', recipient: '이세나', organization: '대한디지털헬스학회', year: '2024' },
   { title: '대한의용생체공학회 우수포스터논문상 우수상', recipient: '이세나', organization: '대한의용생체공학회', year: '2024' },
@@ -15,6 +17,7 @@ const awards = [
   { title: '대한의용생체공학회 2023년 추계학술대회 우수논문상', recipient: '김근혜', organization: '대한의용생체공학회', year: '2023' },
   { title: '대한의용생체공학회 2023년 추계학술대회 우수 포스터 논문상', recipient: '강현영', organization: '대한의용생체공학회', year: '2023' },
   { title: '대한디지털헬스학회 우수상', recipient: '이세나', organization: '대한디지털헬스학회', year: '2023' },
+  { title: '2023년 대한디지털헬스학회 대상', recipient: '추유성', organization: '대한디지털헬스학회', year: '2023' },
   { title: '대한의용생체공학회 2023년 춘계학술대회 우수포스터상', recipient: '서경덕', organization: '대한의용생체공학회', year: '2023' },
   { title: '대한의용생체공학회  2023년 춘계학술대회 우수논문상', recipient: '이세나', organization: '대한의용생체공학회', year: '2023' },
   { title: '보건의료빅데이터 디지털헬스테어사업아이디어 경진대회 최우수상', recipient: '강현영', organization: '건강보험심사평가원, 강원테크노파크', year: '2022' },
