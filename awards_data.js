@@ -1,5 +1,5 @@
 const awards = [
-  { title: '제 40회 대한의학영상정보학회 학술대회 우수상', recipient: '박영현', organization: '대한의학영상정보학회', year: '2026' }
+  { title: '제 40회 대한의학영상정보학회 학술대회 우수상', recipient: '박영현', organization: '대한의학영상정보학회', year: '2026' },
   { title: '대한의용생체공학회 2025년 춘계학술대회 우수논문 대상', recipient: '박영현', organization: '대한의용생체공학회', year: '2025' },
   { title: '대한디지털헬스학회 우수상', recipient: '강현영', organization: '대한디지털헬스학회', year: '2024' },
   { title: '대한디지털헬스학회 최우수상', recipient: '이세나', organization: '대한디지털헬스학회', year: '2024' },
