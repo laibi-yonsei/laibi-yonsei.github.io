@@ -191,7 +191,7 @@ const publications = [
   { title: 'Acral Lentiginous Melanoma Classification Using Deep-learning in dermoscopy images', authors: 'Yuseong Chu, Sangkyun Yoo, Solam Lee, *Byungho Oh, *Sejung Yang', venue: 'domestic, IEIE2019, June 2019', year: 2019, type: 'Conferences' },
   { title: 'Noise removal method for effective cell tracking', authors: 'Junghun Han, Honggi An, Jiyeon Hyun, *Sejung Yang', venue: 'domestic, KSMBE2019, May 2019', year: 2019, type: 'Conferences' },
   { title: 'Cell tracking using machine learning', authors: 'Honggi An, Junghun Han, Jongmin Baek, Seungun Ha, *Sejung Yang', venue: 'domestic, KSMBE2019, May 2019', year: 2019, type: 'Conferences' },
-  { title: 'Cell counting method using kernel-graphcut and watershed algorithm\"', authors: 'Hyunwoo Lee, Hoseok Kim, Sena Lee, Jiyoung Lee, *Sejung Yang', venue: 'domestic, KSMBE2019, May 2019', year: 2019, type: 'Conferences' },
+  { title: 'Cell counting method using kernel-graphcut and watershed algorithm', authors: 'Hyunwoo Lee, Hoseok Kim, Sena Lee, Jiyoung Lee, *Sejung Yang', venue: 'domestic, KSMBE2019, May 2019', year: 2019, type: 'Conferences' },
   { title: 'Knee Endoscopic Image Enhancement', authors: 'Changi Kim, Junghun Han, Dongjin Kim, *Sejung Yang', venue: 'domestic, KSMBE2019, May 2019', year: 2019, type: 'Conferences' },
   { title: '딥 러닝을 이용한 말단 흑색종과 양성모반 분류', authors: 'Yuseong Chu, Sangkyun Yoo, Solam Lee, Honggi An, *Byungho Oh, *Sejung Yang', venue: 'domestic, KSMBE2019, May 2019', year: 2019, type: 'Conferences' },
 ];
