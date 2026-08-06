@@ -2,7 +2,7 @@ const photos = [
   { title: 'ICML 2026', image: 'assets/gallery/photo_038.jpg' },
   { title: 'AIME 2026', image: 'assets/gallery/photo_037.jpg' },
   { title: '2026년 대한의료영상정보학회', image: 'assets/gallery/photo_036.jpg' },
-  { title: '2026 스승의날', image: 'assets/gallery/photo_012.jpg' },
+  { title: '2026 스승의날', image: 'assets/gallery/photo_035.jpg' },
   { title: '2026 춘계 의공학회', image: 'assets/gallery/photo_034.jpg' },
   { title: 'IPIU 2026', image: 'assets/gallery/photo_033.jpg' },  
   { title: '2025 연구실 송년회', image: 'assets/gallery/photo_032.jpg' },
