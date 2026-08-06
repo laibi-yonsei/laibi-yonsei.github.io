@@ -3,6 +3,8 @@ const awards = [
   { title: 'Best IMKASID Abstract Award', recipient: '한중훈', organization: '대한장연구학회', year: '2026' },
   { title: '제 35회 과학기술 우수논문상', recipient: '양세정', organization: '한국과학기술단체총연합회', year: '2025' },
   { title: 'Yonsei Medical Journal 2022–2023 최우수 논문상', recipient: '양세정', organization: 'Yonsei Medical Journal', year: '2025' },
+  { title: '대한의용생체공학회 2025년 추계학술대회 우수논문 대상', recipient: '김근혜', organization: '대한의용생체공학회', year: '2025' },
+  { title: ' 대한디지털헬스학회 2025년 추계학술대회 포스터 장려상', recipient: '김근혜', organization: '대한디지털헬스학회', year: '2025' },
   { title: '대한의용생체공학회 2025년 춘계학술대회 우수논문 대상', recipient: '박영현', organization: '대한의용생체공학회', year: '2025' },
   { title: 'Journal of Biomedical Engineering Research 우수논문상', recipient: '한중훈', organization: '대한의용생체공학회', year: '2024' },
   { title: '연세대학교 대학원 단과대 최우수논문상', recipient: '추유성', organization: '연세대학교 일반대학원', year: '2024' },
