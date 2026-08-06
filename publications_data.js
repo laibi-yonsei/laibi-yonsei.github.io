@@ -67,7 +67,7 @@ const publications = [
   { title: 'A Novel 3-D Color Histogram Equalization Method with Uniform 1-D Gray Scale Histogram', authors: 'Ji-Hee Han, Sejung Yang, Byung-Uk Lee', venue: 'IEEE Trans. on Image Processing (IF: 4.828), Feb, ~2014', year: 2014, type: 'Journals', url: 'https://doi.org/10.1109/TIP.2010.2068555' },
   { title: 'Efficient transform using canonical signed digit in reversible color transforms', authors: 'Sejung Yang, Byung-Uk Lee', venue: 'Journal of Electronic Imaging (IF: 0.754), Jul, ~2014', year: 2014, type: 'Journals', url: 'https://doi.org/10.1117/1.3206966' },
   { title: 'A low-power CSD linear phase FIR filter structure using vertical common sub expression', authors: 'Young-Beom Jang, Sejung Yang', venue: 'Electronics Letters (IF: 1.155), Jul, ~2014', year: 2014, type: 'Journals', url: 'https://doi.org/10.1049/el:20020529' },
-  { title: 'VL-RewardGen: Vision–Language Reward Driven Skin Lesion Image Generation', authors: Yusung Chu, Sejung Yang', venue: 'international, MICCAI 2026, September', year: 2026, type: 'Conferences' },
+  { title: 'VL-RewardGen: Vision–Language Reward Driven Skin Lesion Image Generation', authors: 'Yusung Chu, Sejung Yang', venue: 'international, MICCAI 2026, September', year: 2026, type: 'Conferences' },
   { title: '의료 파운데이션 모델들의 피부 병변 분할 성능 비교', authors: '추유성, 양세정, 오병호', venue: 'domestic, Kosomebe 2025, May', year: 2025, type: 'Conferences' },
   { title: '안진 검출을 위한 광학 흐름 기반 3D 딥러닝 모델', authors: '이예린, 서영준, 양세정', venue: 'domestic, Kosomebe 2025, May', year: 2025, type: 'Conferences' },
   { title: '조영제 초음파 기반 딥러닝을 활용한 무증상 신장이식편 거부반응의 비침습적 예측', authors: '류지승, 안지현, 양세정', venue: 'domestic, Kosomebe 2025, May', year: 2025, type: 'Conferences' },
