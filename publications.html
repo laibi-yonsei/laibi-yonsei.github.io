@@ -40,6 +40,10 @@ years.sort((a, b) => a === 'All' ? -1 : b - a);
 // 출판 종류 필터 배열 생성
 const types = ['All', 'Journals', 'Conferences'];
 
+// month 값(1~12)을 항상 풀네임으로 표시하기 위한 배열
+const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'];
+
 // 현재 선택된 상태 저장
 let activeYear = 'All';
 let activeType = 'All';
@@ -56,11 +60,14 @@ function render() {
   ).join('');
 
   // 교집합 필터링: 연도와 종류가 모두 일치하는 항목만 추출
-  const filtered = publications.filter(p => 
+  const filtered = publications.filter(p =>
     (activeYear === 'All' || String(p.year) === activeYear) &&
     (activeType === 'All' || p.type === activeType)
   );
-  
+
+  // 연도 → 월 기준 내림차순 정렬 (최신 논문이 위로)
+  filtered.sort((a, b) => b.year - a.year || (b.month || 0) - (a.month || 0));
+
   // 결과 리스트 렌더링
   document.getElementById('pub-list').innerHTML = filtered.map(p => `
     <div class="pub-entry">
@@ -68,7 +75,7 @@ function render() {
         <div class="pub-title">${p.title}</div>
         <div class="pub-authors">${p.authors}</div>
         <div class="pub-links">
-          <span class="badge">${p.venue}</span>
+          <span class="badge">${p.venue} (${p.month ? MONTH_NAMES[p.month - 1] + ' ' : ''}${p.year})</span>
           ${p.type === 'Journals' && p.url ? `<a href="${p.url}" target="_blank" style="font-size:12px;font-weight:500;padding:4px 12px;border:1px solid var(--blue);border-radius:4px;color:var(--blue);transition:all 0.2s;text-decoration:none;" onmouseover="this.style.background='var(--blue)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--blue)'">Paper →</a>` : ''}
         </div>
       </div>

@@ -89,9 +89,37 @@
 <div id="site-footer"></div>
 
 <script src="components.js"></script>
-<script src="news_data.js"></script>
+<!-- 수상/논문 데이터에서 뉴스를 자동 생성합니다. 두 파일에 항목을 추가하면 여기에 자동 반영됩니다. -->
+<script src="awards_data.js"></script>
+<script src="publications_data.js"></script>
 <script>
 initPage('Home');
+
+// venue 앞의 'Domestic, ' / 'International(IF=...), ' 라벨 제거 (뉴스 표시용)
+function venueName(v) {
+  return v.replace(/^(Domestic|International)\s*(\([^)]*\))?\s*[,/]\s*/i, '').trim();
+}
+
+// awards_data.js + publications_data.js 로부터 뉴스 항목 자동 생성
+const newsData = [
+  // 논문: 저널 게재 / 학회 발표
+  ...publications.map(p => ({
+    sortKey: p.year * 100 + (p.month || 0),
+    date: p.month ? `${p.year}.${String(p.month).padStart(2, '0')}` : String(p.year),
+    text: p.type === 'Journals'
+      ? `Paper published in <strong>${venueName(p.venue)}</strong> — "${p.title}"`
+      : `Paper presented at <strong>${venueName(p.venue)}</strong> — "${p.title}"`
+  })),
+  // 수상 (월 정보가 없어 연도만 표시, 같은 연도 내에서는 논문 뒤에 배치)
+  ...awards.map(a => ({
+    sortKey: (+a.year) * 100,
+    date: String(a.year),
+    text: `<strong>${a.title.trim()}</strong> 수상 — ${a.recipient}`
+  })),
+];
+
+// 연도 → 월 내림차순 정렬 (최신 소식이 위로)
+newsData.sort((a, b) => b.sortKey - a.sortKey);
 
 let newsShown = 4;
 
