@@ -1,5 +1,10 @@
 // 저널(Journals) 논문 — 새 저널 논문은 이 배열에 추가하세요.
 const journalPublications = [
+  { title: 'Artificial Intelligence-based 3D Assessment of Alopecia Areata Using Clinical Photographs', authors: 'Yerin Lee, Sena Lee, Solam Lee, Sejung Yang*', venue: 'International, Journal of the American Academy of Dermatology', year: 2026, month: 8, url: 'https://doi.org/10.1016/j.jaad.2026.08.069' },
+  { title: 'Objective and Quantitative Assessment of Facial Vitiligo via AI-powered 3D Analysis for Diagnostic Support', authors: 'Sena Lee, You Hyun Kim, Younghyun Park, Yerin Lee, Yusung Chu, Jae Joon Jeon, Solam Lee, Sejung Yang', venue: 'International, British Journal of Dermatology', year: 2026, month: 7, url: 'https://doi.org/10.1093/bjd/ljag290' },
+  { title: 'DEP-track: a motion-aware framework for large-scale cell tracking and crossover frequency estimation in dielectrophoresis', authors: 'Sena Lee, Seungyeop Choi, Yerin Lee, Hyunmin Bae, Junghun Han, Yoon Suk Kim, Sang Woo Lee, Sejung Yang', venue: 'International, Frontiers in Bioinformatics', year: 2026, month: 4, url: 'https://doi.org/10.3389/fbinf.2026.1821804' },
+  { title: 'Evaluation of Pulsed Electromagnetic Field as a Treatment for Atopic Dermatitis in a Mouse Model Using Image Analysis Based on Machine Learning', authors: 'Yerin Lee†, Junghun Han†, Yu Seong Chu†, Sena Lee, Jiyoung Lee, Ko Eun Kim, Junyoung Kim, Yong-Heum Lee, Sejung Yang', venue: 'Domestic, Digital Health Research', year: 2024, month: 3, url: 'https://doi.org/10.61499/dhr.2024.2.e1' },
+  { title: '안진영상에서 안진기의 미끄러짐으로 유발된 동잡음 제거 알고리즘 개발', authors: '이예린, 서영준, 양세정', venue: 'Domestic, Research in Vestibular Science', year: 2022, month: 12, url: 'https://doi.org/10.21790/rvs.2022.21.4.104' },
   { title: 'AI-assisted diagnosis of nail unit melanoma and melanonychia using a clinical deep learning model', authors: 'Yusung Chu, Sejung Yang, Jin-Woong Jung, Jun Young Kim, Joon-Goon Kim, Hae June Sung, Byungho Oh', venue: 'International(IF=5.0), Journal der Deutschen Dermatologischen Gesellschaft', year: 2026, month: 7, url: 'https://doi.org/10.1111/ddg.70347' },
   { title: 'A low-power CSD linear phase FIR filter structure using vertical common sub expression', authors: 'Young-Beom Jang, Sejung Yang', venue: 'International, Electronics Letters (IF: 1.155)', year: 2014, month: 7, url: 'https://doi.org/10.1049/el:20020529' },
   { title: 'Stable and unstable chromosomal aberration detection system for biodosimetry', authors: 'Junghun Han, Inkyung Lee, Yousun Chung, Sejung Yang', venue: 'International(IF=5.3), Array', year: 2026, month: 7, url: 'https://doi.org/10.1016/j.array.2026.101006' },
@@ -77,6 +82,9 @@ const journalPublications = [
 
 // 학회(Conferences) 논문 — 새 학회 논문은 이 배열에 추가하세요.
 const conferencePublications = [
+  { title: '임상사진 기반 만성정맥부전 하지 피부 병변 분류를 위한 자세 기반 인공지능 모델', authors: '이예린†, 김고은†, 강현영, 김대현, 노환규, 이세나, *김범석, *양세정', venue: 'Domestic, KSIIM 2026', year: 2026, month: 7 },
+  { title: '인공지능을 이용한 만성정맥부전 관련 하지 피부 병변 임상사진 분류', authors: '이예린, 김고은, 강현영, 김범석, 양세정', venue: 'Domestic, Kosomebe 2025', year: 2025, month: 11 },
+  { title: '결측치를 고려한 딥러닝 기반의 1차원 시계열 안진 신호 분류', authors: '이예린, 서영준, 양세정', venue: 'Domestic, KSIIM 2023', year: 2023, month: 6 },
   { title: 'VL-RewardGen: Vision–Language Reward Driven Skin Lesion Image Generation', authors: 'Yusung Chu, Sejung Yang', venue: 'International, MICCAI 2026', year: 2026, month: 9 },
   { title: 'HiEDL: Hierarchical Evidential Deep Learning for Uncertainty-Aware Tumor Segmentation from 3D CT via Boundary Regularization', authors: 'Younghyun Park†, Jin Gyo Jeong†, Sejung Yang', venue: 'International, MICCAI 2026', year: 2026, month: 9 },
   { title: '의료 파운데이션 모델들의 피부 병변 분할 성능 비교', authors: '추유성, 양세정, 오병호', venue: 'Domestic, Kosomebe 2025', year: 2025, month: 5 },
